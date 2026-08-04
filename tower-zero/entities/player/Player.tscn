@@ -47,3 +47,4 @@ damage = 40
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox" unique_id=2143761060]
 position = Vector2(64, 0)
 shape = SubResource("RectangleShape2D_sword")
+disabled = true
