@@ -17,7 +17,7 @@ height = 135.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
 size = Vector2(80, 140)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"] unique_id=484063914]
+[node name="Player" type="CharacterBody2D" unique_id=484063914 groups=["Player"]]
 script = ExtResource("1_453mm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=4198736]
@@ -27,12 +27,13 @@ texture = ExtResource("1_mab2k")
 shape = SubResource("CapsuleShape2D_1a6jk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1629168779]
+zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
 
 [node name="HealthComponent" type="Node" parent="." unique_id=428759908]
 script = ExtResource("3_eaotn")
 
-[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component") unique_id=1009358373]
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1009358373 node_paths=PackedStringArray("health_component")]
 script = ExtResource("4_g3lhm")
 health_component = NodePath("../HealthComponent")
 

@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var label: Label = $Label
 
-func setup(damage: int) -> void:
+func setup(damage: Variant) -> void:
 	var random_x = randf_range(-30, 30)
 	position += Vector2(random_x, -50)
 	
