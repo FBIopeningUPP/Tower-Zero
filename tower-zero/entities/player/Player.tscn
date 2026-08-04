@@ -17,7 +17,7 @@ height = 135.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
 size = Vector2(80, 140)
 
-[node name="Player" type="CharacterBody2D" unique_id=484063914]
+[node name="Player" type="CharacterBody2D" groups=["Player"] unique_id=484063914]
 script = ExtResource("1_453mm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=4198736]
