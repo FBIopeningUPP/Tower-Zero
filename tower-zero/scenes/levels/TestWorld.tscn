@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://diqxlowqopsan"]
 
 [ext_resource type="PackedScene" uid="uid://tqkfqv1fkj1i" path="res://entities/player/Player.tscn" id="1_c15ke"]
+[ext_resource type="PackedScene" uid="uid://cid5ecr1lkc2f" path="res://entities/enemies/Enemy.tscn" id="2_i1nbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1a6jk"]
 size = Vector2(1000, 40)
@@ -22,3 +23,8 @@ color = Color(0.41687, 1, 1, 1)
 
 [node name="Player" parent="." unique_id=1348520001 instance=ExtResource("1_c15ke")]
 position = Vector2(500, 200)
+
+[node name="Enemy" parent="." unique_id=1493774482 instance=ExtResource("2_i1nbr")]
+position = Vector2(262, 199)
+speed = null
+damage = null
