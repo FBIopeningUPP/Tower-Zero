@@ -7,11 +7,14 @@
 radius = 64.0
 height = 128.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=484063914]
 script = ExtResource("1_453mm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=4198736]
 texture = ExtResource("1_mab2k")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=153392527]
 shape = SubResource("CapsuleShape2D_1a6jk")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1629168779]
+position_smoothing_enabled = true
