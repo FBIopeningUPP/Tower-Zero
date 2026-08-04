@@ -10,11 +10,20 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent and health_component != null:
-		if area.get_parent() == self.get_parent():
+		var attacker = area.get_parent()
+		var victim = self.get_parent()
+		
+		if attacker == victim:
 			return # Don't hit yourself!
 			
-		# Prevent enemies from hitting each other and freezing the game
-		if area.get_parent() is Enemy and self.get_parent() is Enemy:
+		# The player's blaster projectiles shouldn't hurt the player!
+		if attacker is projectile and victim is Player:
+			return
+			
+		# Enemies and Drones shouldn't hurt each other
+		var attacker_is_enemy = (attacker is Enemy) or (attacker is Drone)
+		var victim_is_enemy = (victim is Enemy) or (victim is Drone)
+		if attacker_is_enemy and victim_is_enemy:
 			return
 			
 		health_component.take_damage(area.damage)

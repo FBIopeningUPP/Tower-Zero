@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cboss123abc2d"]
+
+[ext_resource type="Script" uid="uid://d1bossxyzabc" path="res://entities/enemies/Boss.gd" id="1_boss"]
+[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_rfvys"]
+[ext_resource type="Script" uid="uid://bws6rd0o0y2qj" path="res://components/HitboxComponent.gd" id="3_i8idp"]
+[ext_resource type="Script" uid="uid://clwid7o1uos2" path="res://components/HealthComponent.gd" id="4_i8idp"]
+[ext_resource type="Script" uid="uid://buytlmqy4ibnf" path="res://components/HurtboxComponent.gd" id="5_ae7xc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a6jk"]
+radius = 64.0
+height = 128.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_180yc"]
+radius = 70.0
+height = 140.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oh04j"]
+radius = 70.0
+height = 140.0
+
+[node name="Boss" type="CharacterBody2D"]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_boss")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_rfvys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1a6jk")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+script = ExtResource("3_i8idp")
+damage = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CapsuleShape2D_180yc")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_i8idp")
+max_health = 1000
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("5_ae7xc")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_oh04j")

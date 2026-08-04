@@ -17,6 +17,9 @@ var dash_timer: float = 0.0
 var energy: int = 100
 var max_energy: int = 100
 var shake_strength: float = 0
+var xp: int = 0
+var level: int = 1
+var xp_to_next_level: int = 50
 @onready var camera: Camera2D = $Camera2D
 
 enum State { NORMAL, DASHING }
@@ -27,6 +30,7 @@ var current_state: State = State.NORMAL
 @onready var sword_hitbox: Area2D = $SwordHitbox
 
 var projectile_scene = preload("res://entities/projectiles/Projectile.tscn")
+var damage_number_scene = preload("res://scenes/effects/DamageNumber.tscn")
 
 func _ready() -> void:
 	if health_component:
@@ -40,6 +44,11 @@ func _ready() -> void:
 	
 	var ui = game_over_scene.instantiate()
 	add_child(ui)
+	
+	EventBus.enemy_died.connect(_on_enemy_killed)
+	
+	camera.zoom = Vector2(0.6, 0.6)
+	camera.position_smoothing_enabled = true
 
 func _on_enemy_damaged() -> void:
 	energy = min(energy + 20, max_energy)
@@ -156,3 +165,24 @@ func _on_death() -> void:
 	var ui = get_node("GameOverScreen")
 	if ui:
 		ui.show_death_screen()
+
+func _on_enemy_killed(gained_xp: int) -> void:
+	xp += gained_xp
+	
+	if xp >= xp_to_next_level:
+		xp -= xp_to_next_level
+		level += 1
+		xp_to_next_level = int(xp_to_next_level * 1.5)
+		
+		max_energy += 25
+		energy = max_energy
+		EventBus.player_energy_changed.emit(energy, max_energy)
+		
+		health_component.health = health_component.max_health
+		EventBus.player_health_changed.emit(health_component.health, health_component.max_health)
+		
+		var popup = damage_number_scene.instantiate()
+		get_parent().add_child(popup)
+		popup.global_position = self.global_position
+		popup.setup("LEVEL UP!")
+		popup.label.add_theme_color_override("font_color", Color.GOLD)
