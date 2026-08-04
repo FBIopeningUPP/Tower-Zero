@@ -20,8 +20,8 @@ func _on_death() -> void:
 	get_parent().add_child(explosion)
 	explosion.global_position = self.global_position
 	
-	queue_free()
 	EventBus.enemy_died.emit(10)
+	queue_free()
 	
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
