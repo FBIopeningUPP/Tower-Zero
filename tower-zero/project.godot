@@ -82,3 +82,7 @@ attack={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[autoload]
+
+EventBus="*res://systems/EventBus.gd"

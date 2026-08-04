@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="1_mab2k"]
 [ext_resource type="Script" uid="uid://clwid7o1uos2" path="res://components/HealthComponent.gd" id="3_eaotn"]
 [ext_resource type="Script" uid="uid://buytlmqy4ibnf" path="res://components/HurtboxComponent.gd" id="4_g3lhm"]
+[ext_resource type="Script" uid="uid://bws6rd0o0y2qj" path="res://components/HitboxComponent.gd" id="5_g3lhm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a6jk"]
 radius = 64.0
@@ -12,6 +13,9 @@ height = 128.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_180yc"]
 radius = 67.5
 height = 135.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
+size = Vector2(80, 140)
 
 [node name="Player" type="CharacterBody2D" unique_id=484063914]
 script = ExtResource("1_453mm")
@@ -28,9 +32,18 @@ position_smoothing_enabled = true
 [node name="HealthComponent" type="Node" parent="." unique_id=428759908]
 script = ExtResource("3_eaotn")
 
-[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1009358373 node_paths=PackedStringArray("health_component")]
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component") unique_id=1009358373]
 script = ExtResource("4_g3lhm")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1936574610]
 shape = SubResource("CapsuleShape2D_180yc")
+
+[node name="SwordHitbox" type="Area2D" parent="." unique_id=416743579]
+monitoring = false
+script = ExtResource("5_g3lhm")
+damage = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox" unique_id=2143761060]
+position = Vector2(64, 0)
+shape = SubResource("RectangleShape2D_sword")

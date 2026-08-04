@@ -17,6 +17,7 @@ var current_state: State = State.NORMAL
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var sword_hitbox: Area2D = $SwordHitbox
 
 func _ready() -> void:
 	if health_component:
@@ -63,6 +64,11 @@ func handle_normal_state(delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
 		start_dash()
 		return
+	
+	if Input.is_action_just_pressed("attack"):
+		sword_hitbox.monitoring = true
+		get_tree().create_timer(0.1).timeout.connect(func(): sword_hitbox.monitoring = false)
+		print("Swung Sword!")
 
 	var direction := Input.get_axis("move_left", "move_right")
 	var current_speed = walk_speed if Input.is_action_pressed("walk") else run_speed
@@ -72,6 +78,7 @@ func handle_normal_state(delta: float) -> void:
 		
 	if direction:
 		velocity.x = direction * current_speed
+		sword_hitbox.position.x = abs(sword_hitbox.position.x) * direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 
