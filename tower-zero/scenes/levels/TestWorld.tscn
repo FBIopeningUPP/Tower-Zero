@@ -1,54 +1,23 @@
-[gd_scene format=3 uid="uid://diqxlowqopsan"]
+[gd_scene format=4 uid="uid://diqxlowqopsan"]
 
 [ext_resource type="PackedScene" uid="uid://tqkfqv1fkj1i" path="res://entities/player/Player.tscn" id="1_c15ke"]
 [ext_resource type="PackedScene" uid="uid://cid5ecr1lkc2f" path="res://entities/enemies/Enemy.tscn" id="2_i1nbr"]
 [ext_resource type="PackedScene" uid="uid://b8j082gjy82in" path="res://scenes/ui/HUD.tscn" id="3_iyqsp"]
+[ext_resource type="PackedScene" uid="uid://hu43d4tymiho" path="res://systems/spawners/EnemySpawner.tscn" id="4_ydtff"]
+[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="5_v3ud1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1a6jk"]
-size = Vector2(1000, 40)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nig7w"]
+texture = ExtResource("5_v3ud1")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
-size = Vector2(40, 1000)
+[sub_resource type="TileSet" id="TileSet_8toc6"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_nig7w")
 
 [node name="TestWorld" type="Node2D" unique_id=1462798428]
-
-[node name="Floor" type="StaticBody2D" parent="." unique_id=350256650]
-position = Vector2(500, 500)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=949158146]
-shape = SubResource("RectangleShape2D_1a6jk")
-
-[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=217104738]
-offset_left = -500.0
-offset_top = -20.0
-offset_right = 500.0
-offset_bottom = 20.0
-color = Color(0.41687, 1, 1, 1)
-
-[node name="WallLeft" type="StaticBody2D" parent="." unique_id=517315416]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft" unique_id=1453919064]
-shape = SubResource("RectangleShape2D_wall")
-
-[node name="ColorRect" type="ColorRect" parent="WallLeft" unique_id=1378879866]
-offset_left = -20.0
-offset_top = -500.0
-offset_right = 20.0
-offset_bottom = 500.0
-color = Color(0.41687, 1, 1, 1)
-
-[node name="WallRight" type="StaticBody2D" parent="." unique_id=414749301]
-position = Vector2(1000, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight" unique_id=1177651559]
-shape = SubResource("RectangleShape2D_wall")
-
-[node name="ColorRect" type="ColorRect" parent="WallRight" unique_id=1145046633]
-offset_left = -20.0
-offset_top = -500.0
-offset_right = 20.0
-offset_bottom = 500.0
-color = Color(0.41687, 1, 1, 1)
 
 [node name="Player" parent="." unique_id=1300512529 instance=ExtResource("1_c15ke")]
 position = Vector2(500, 200)
@@ -57,3 +26,10 @@ position = Vector2(500, 200)
 position = Vector2(262, 199)
 
 [node name="HUD" parent="." unique_id=218751332 instance=ExtResource("3_iyqsp")]
+
+[node name="EnemySpawner" parent="." unique_id=1774919682 instance=ExtResource("4_ydtff")]
+position = Vector2(500, -181)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=863036647]
+tile_map_data = PackedByteArray("AAD+/wQAAAAAAAAAAAD//wQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAD9//v/AAAAAAAAAAAMAPv/AAAAAAAAAAD9//z/AAAAAAAAAAAMAPz/AAAAAAAAAAD9//3/AAAAAAAAAAAMAP3/AAAAAAAAAAD9//7/AAAAAAAAAAAMAP7/AAAAAAAAAAD9////AAAAAAAAAAAMAP//AAAAAAAAAAD9/wAAAAAAAAAAAAAMAAAAAAAAAAAAAAD9/wEAAAAAAAAAAAAMAAEAAAAAAAAAAAD9/wIAAAAAAAAAAAAMAAIAAAAAAAAAAAD9/wMAAAAAAAAAAAAMAAMAAAAAAAAAAAD9/wQAAAAAAAAAAAAMAAQAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8toc6")

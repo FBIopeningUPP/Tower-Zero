@@ -11,8 +11,10 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump: bool = false
 var is_crouching: bool = false
 var dash_timer: float = 0.0
-var energy: int = 0
+var energy: int = 100
 var max_energy: int = 100
+var shake_strength: float = 0
+@onready var camera: Camera2D = $Camera2D
 
 enum State { NORMAL, DASHING }
 var current_state: State = State.NORMAL
@@ -21,10 +23,19 @@ var current_state: State = State.NORMAL
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var sword_hitbox: Area2D = $SwordHitbox
 
+var projectile_scene = preload("res://entities/projectiles/Projectile.tscn")
+
 func _ready() -> void:
 	if health_component:
 		health_component.health_changed.connect(_on_health_changed)
 		EventBus.player_energy_changed.emit(energy, max_energy)
+	
+	EventBus.enemy_damaged.connect(_on_enemy_damaged)
+	EventBus.hit_landed.connect(func(): shake_strength = 15.0)
+
+func _on_enemy_damaged() -> void:
+	energy = min(energy + 20, max_energy)
+	EventBus.player_energy_changed.emit(energy, max_energy)
 
 func _on_health_changed(current: int, max_hp: int) -> void:
 	sprite.modulate = Color.RED
@@ -73,6 +84,21 @@ func handle_normal_state(delta: float) -> void:
 		sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
 		get_tree().create_timer(0.1).timeout.connect(func(): sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
 		print("Swung Sword!")
+		
+	if Input.is_action_just_pressed("shoot"):
+		print("SHOOT PRESSED! Energy: ", energy, "/", max_energy)
+		if energy >= 25:
+			energy -= 25
+			EventBus.player_energy_changed.emit(energy, max_energy)
+			
+			print("PEW! Fired Blaster! Energy remaining: ", energy)
+			
+			var proj = projectile_scene.instantiate()
+			get_parent().add_child(proj)
+			proj.global_position = global_position
+			proj.direction = sign(velocity.x) if velocity.x != 0 else 1
+		else:
+			print("NOT ENOUGH ENERGY TO SHOOT!")
 
 	var direction := Input.get_axis("move_left", "move_right")
 	var current_speed = walk_speed if Input.is_action_pressed("walk") else run_speed
@@ -102,3 +128,12 @@ func handle_dash_state(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, run_speed)
 		velocity.y = 0
 		current_state = State.NORMAL
+		
+func _process(delta: float) -> void:
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0, 10 * delta)
+		var offset_x = randf_range(-shake_strength, shake_strength)
+		var offset_y = randf_range(-shake_strength, shake_strength)
+		camera.offset = Vector2(offset_x, offset_y)
+	else:
+		camera.offset = Vector2.ZERO
