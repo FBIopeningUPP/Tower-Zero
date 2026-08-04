@@ -7,6 +7,9 @@ class_name Player
 @export var dash_speed: float = 800.0
 @export var dash_duration: float = 0.2
 
+@onready var hurtbox_collision: CollisionShape2D = $HurtboxComponent/CollisionShape2D
+
+var game_over_scene = preload("res://scenes/ui/GameOverScreen.tscn")
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump: bool = false
 var is_crouching: bool = false
@@ -32,6 +35,11 @@ func _ready() -> void:
 	
 	EventBus.enemy_damaged.connect(_on_enemy_damaged)
 	EventBus.hit_landed.connect(func(): shake_strength = 15.0)
+	
+	health_component.health_depleted.connect(_on_death)
+	
+	var ui = game_over_scene.instantiate()
+	add_child(ui)
 
 func _on_enemy_damaged() -> void:
 	energy = min(energy + 20, max_energy)
@@ -121,6 +129,9 @@ func start_dash() -> void:
 	dash_timer = dash_duration
 	current_state = State.DASHING
 	scale.y = 1.0
+	
+	hurtbox_collision.set_deferred("disabled", true)
+	sprite.modulate = Color.CYAN
 
 func handle_dash_state(delta: float) -> void:
 	dash_timer -= delta
@@ -128,12 +139,20 @@ func handle_dash_state(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, run_speed)
 		velocity.y = 0
 		current_state = State.NORMAL
-		
+	
+	hurtbox_collision.set_deferred("disabled", false)
+	sprite.modulate = Color.WHITE
+
 func _process(delta: float) -> void:
 	if shake_strength > 0:
-		shake_strength = lerp(shake_strength, 0, 10 * delta)
+		shake_strength = lerpf(shake_strength, 0.0, 10 * delta)
 		var offset_x = randf_range(-shake_strength, shake_strength)
 		var offset_y = randf_range(-shake_strength, shake_strength)
 		camera.offset = Vector2(offset_x, offset_y)
 	else:
 		camera.offset = Vector2.ZERO
+		
+func _on_death() -> void:
+	var ui = get_node("GameOverScreen")
+	if ui:
+		ui.show_death_screen()

@@ -1,6 +1,8 @@
 extends Area2D
 class_name HurtboxComponent
 
+var damage_number_scene = preload("res://scenes/effects/DamageNumber.tscn")
+
 @export var health_component: HealthComponent
 
 func _ready() -> void:
@@ -17,3 +19,8 @@ func _on_area_entered(area: Area2D) -> void:
 			
 		health_component.take_damage(area.damage)
 		EventBus.hit_landed.emit()
+		
+		var num = damage_number_scene.instantiate()
+		get_tree().current_scene.add_child(num)
+		num.global_position = self.global_position
+		num.setup(area.damage)
