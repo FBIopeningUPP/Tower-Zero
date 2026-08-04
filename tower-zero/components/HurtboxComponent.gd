@@ -11,5 +11,9 @@ func _on_area_entered(area: Area2D) -> void:
 		if area.get_parent() == self.get_parent():
 			return # Don't hit yourself!
 			
+		# Prevent enemies from hitting each other and freezing the game
+		if area.get_parent() is Enemy and self.get_parent() is Enemy:
+			return
+			
 		health_component.take_damage(area.damage)
 		EventBus.hit_landed.emit()

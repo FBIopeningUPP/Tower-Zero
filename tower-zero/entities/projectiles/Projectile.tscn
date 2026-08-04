@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cxiwun7t8qs7q"]
+
+[ext_resource type="Script" uid="uid://cgic0tgvqvu1k" path="res://entities/projectiles/Projectile.gd" id="1_avawr"]
+[ext_resource type="Script" uid="uid://bws6rd0o0y2qj" path="res://components/HitboxComponent.gd" id="2_rscxe"]
+[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="3_o8llt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_proj"]
+radius = 16.0
+
+[node name="Projectile" type="Area2D" unique_id=1221281169]
+script = ExtResource("1_avawr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560665578]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_o8llt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=71230471]
+shape = SubResource("CircleShape2D_proj")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=345592731]
+script = ExtResource("2_rscxe")
+damage = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=875160890]
+shape = SubResource("CircleShape2D_proj")
+
+[node name="Timer" type="Timer" parent="." unique_id=1688467538]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bty4eqhoovbvo"]
+
+[ext_resource type="Script" uid="uid://drq843hd73hr" path="res://scenes/effects/DeathParticles.gd" id="1_dpart"]
+
+[node name="DeathParticles" type="CPUParticles2D"]
+emitting = true
+amount = 30
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+color = Color(1, 0, 0, 1)
+script = ExtResource("1_dpart")
