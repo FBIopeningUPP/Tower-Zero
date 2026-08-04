@@ -1,0 +1,27 @@
+# Godot 4+ specific ignores
+.godot/
+!/.godot/extension_list.cfg
+!/.godot/global_script_class_cache.cfg
+
+# Exported games/builds (Assuming you will export to these folders eventually)
+/exports/
+/builds/
+export_presets.cfg
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Crash logs
+*.log
+
+# C# / Mono specific ignores (just in case you ever switch from GDScript)
+.mono/
+data_*/
+mono_crash.*.json
