@@ -37,7 +37,7 @@ shape = SubResource("CapsuleShape2D_180yc")
 [node name="HealthComponent" type="Node" parent="." unique_id=1810462494]
 script = ExtResource("4_i8idp")
 
-[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component") unique_id=1685826434]
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1685826434 node_paths=PackedStringArray("health_component")]
 script = ExtResource("5_ae7xc")
 health_component = NodePath("../HealthComponent")
 
