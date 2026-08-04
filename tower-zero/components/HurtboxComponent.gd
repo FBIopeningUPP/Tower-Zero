@@ -8,5 +8,8 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent and health_component != null:
+		if area.get_parent() == self.get_parent():
+			return # Don't hit yourself!
+			
 		health_component.take_damage(area.damage)
 		EventBus.hit_landed.emit()

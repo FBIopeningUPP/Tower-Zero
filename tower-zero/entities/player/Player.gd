@@ -11,6 +11,8 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_double_jump: bool = false
 var is_crouching: bool = false
 var dash_timer: float = 0.0
+var energy: int = 0
+var max_energy: int = 100
 
 enum State { NORMAL, DASHING }
 var current_state: State = State.NORMAL
@@ -22,6 +24,7 @@ var current_state: State = State.NORMAL
 func _ready() -> void:
 	if health_component:
 		health_component.health_changed.connect(_on_health_changed)
+		EventBus.player_energy_changed.emit(energy, max_energy)
 
 func _on_health_changed(current: int, max_hp: int) -> void:
 	sprite.modulate = Color.RED
@@ -31,6 +34,7 @@ func _on_health_changed(current: int, max_hp: int) -> void:
 	velocity.y = -300
 	
 	print("OUCH! Player HP: ", current, "/", max_hp)
+	EventBus.player_health_changed.emit(current, max_hp)
 
 func _physics_process(delta: float) -> void:
 	match current_state:
@@ -66,8 +70,8 @@ func handle_normal_state(delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("attack"):
-		sword_hitbox.monitoring = true
-		get_tree().create_timer(0.1).timeout.connect(func(): sword_hitbox.monitoring = false)
+		sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
+		get_tree().create_timer(0.1).timeout.connect(func(): sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
 		print("Swung Sword!")
 
 	var direction := Input.get_axis("move_left", "move_right")
