@@ -22,6 +22,7 @@ func _on_death() -> void:
 	var explosion = death_particles.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = self.global_position
+	EventBus.enemy_died.emit(10)
 	queue_free()
 	
 func _physics_process(delta: float) -> void:
