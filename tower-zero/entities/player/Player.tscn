@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://player_striker_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
@@ -22,6 +22,12 @@ size = Vector2(40, 90)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(80, 48)
+
+[sub_resource type="Gradient" id="Gradient_player_dash"]
+colors = [Color(0, 1, 1, 1), Color(0, 0.5, 1, 0.5), Color(0, 1, 1, 0)]
+
+[sub_resource type="Gradient" id="Gradient_player_slash"]
+colors = [Color(1, 1, 1, 1), Color(1, 1, 1, 0.5), Color(1, 1, 1, 0)]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource(1)
@@ -80,9 +86,7 @@ speed_scale = 2.0
 gravity = Vector2(0, 0)
 spread = 3.14
 scale = Vector2(0.5, 0.5)
-color_ramp = Gradient {
-	colors = [Color(0, 1, 1, 1), Color(0, 0.5, 1, 0.5), Color(0, 1, 1, 0)]
-}
+color_ramp = SubResource("Gradient_player_dash")
 
 [node name="SlashEffect" type="CPUParticles2D" parent="."]
 emitting = false
@@ -92,6 +96,4 @@ speed_scale = 1.0
 gravity = Vector2(0, 0)
 spread = 1.5
 scale = Vector2(0.3, 0.3)
-color_ramp = Gradient {
-	colors = [Color(1, 1, 1, 1), Color(1, 1, 1, 0.5), Color(1, 1, 1, 0)]
-}
+color_ramp = SubResource("Gradient_player_slash")

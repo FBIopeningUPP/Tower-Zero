@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://enemy_pebble_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://entities/enemies/Galore/Pebble.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
@@ -16,6 +16,9 @@ size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(28, 24)
+
+[sub_resource type="Gradient" id="Gradient_pebble_death"]
+colors = [Color(0.5, 0.5, 0.5, 1), Color(0.3, 0.3, 0.3, 0.5), Color(0.5, 0.5, 0.5, 0)]
 
 [node name="Pebble" type="CharacterBody2D"]
 script = ExtResource(1)
@@ -44,8 +47,7 @@ monitorable = true
 shape = SubResource("RectangleShape2D_hurtbox")
 position = Vector2(0, -12)
 
-[node name="HitboxComponent" type="Area2D" parent="."]
-name = "AttackHitbox"
+[node name="AttackHitbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 1
 monitoring = false
@@ -65,6 +67,4 @@ speed_scale = 1.0
 gravity = Vector2(0, 0)
 spread = 3.14
 scale = Vector2(0.3, 0.3)
-color_ramp = Gradient {
-	colors = [Color(0.5, 0.5, 0.5, 1), Color(0.3, 0.3, 0.3, 0.5), Color(0.5, 0.5, 0.5, 0)]
-}
+color_ramp = SubResource("Gradient_pebble_death")

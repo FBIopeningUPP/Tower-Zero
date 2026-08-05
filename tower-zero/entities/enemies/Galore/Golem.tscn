@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://enemy_golem_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://entities/enemies/Galore/Golem.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
@@ -38,6 +38,12 @@ size = Vector2(64, 108)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(96, 64)
 
+[sub_resource type="Gradient" id="Gradient_golem_death"]
+colors = [Color(0.6, 0.4, 0.2, 1), Color(0.8, 0.5, 0.2, 0.5), Color(0.6, 0.4, 0.2, 0)]
+
+[sub_resource type="Gradient" id="Gradient_golem_armor_break"]
+colors = [Color(0.8, 0.7, 0.5, 1), Color(0.6, 0.5, 0.3, 0.5), Color(0.8, 0.7, 0.5, 0)]
+
 [node name="Golem" type="CharacterBody2D"]
 script = ExtResource(1)
 collision_layer = 2
@@ -65,8 +71,7 @@ monitorable = true
 shape = SubResource("RectangleShape2D_hurtbox")
 position = Vector2(0, -56)
 
-[node name="HitboxComponent" type="Area2D" parent="."]
-name = "AttackHitbox"
+[node name="AttackHitbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 1
 monitoring = false
@@ -91,9 +96,7 @@ speed_scale = 2.0
 gravity = Vector2(0, 0)
 spread = 3.14
 scale = Vector2(0.8, 0.8)
-color_ramp = Gradient {
-	colors = [Color(0.6, 0.4, 0.2, 1), Color(0.8, 0.5, 0.2, 0.5), Color(0.6, 0.4, 0.2, 0)]
-}
+color_ramp = SubResource("Gradient_golem_death")
 
 [node name="ArmorBreakEffect" type="CPUParticles2D" parent="."]
 emitting = false
@@ -103,6 +106,4 @@ speed_scale = 3.0
 gravity = Vector2(0, -50)
 spread = 2.0
 scale = Vector2(0.6, 0.6)
-color_ramp = Gradient {
-	colors = [Color(0.8, 0.7, 0.5, 1), Color(0.6, 0.5, 0.3, 0.5), Color(0.8, 0.7, 0.5, 0)]
-}
+color_ramp = SubResource("Gradient_golem_armor_break")

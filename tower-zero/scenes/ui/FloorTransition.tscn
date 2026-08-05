@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://floor_transition_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://scenes/ui/FloorTransition.gd" id=1]
 [ext_resource type="Shader" path="res://assets/itch/godot-transitions/shader/transition.gdshader" id=2]

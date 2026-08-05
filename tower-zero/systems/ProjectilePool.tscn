@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://projectile_pool_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://systems/ProjectilePool.gd" id=1]
 [ext_resource type="PackedScene" path="res://entities/projectiles/Projectile.tscn" id=2]
