@@ -1,6 +1,12 @@
-[gd_scene format=4 uid="uid://h1a2c3k4i5n6"]
+[gd_scene format=4 uid="uid://hacking_minigame_001"]
 
 [ext_resource type="Script" path="res://scenes/ui/HackingMinigame.gd" id="1_hack"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large.png" id="2_bar"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large_l.png" id="3_bar_l"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large_r.png" id="4_bar_r"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Green/Default/bar_round_gloss_large.png" id="5_bar_green"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Red/Default/bar_round_gloss_large.png" id="6_bar_red"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Yellow/Default/bar_round_gloss_large.png" id="7_bar_yellow"]
 
 [node name="HackingMinigame" type="CanvasLayer" unique_id=3001]
 script = ExtResource("1_hack")
@@ -39,9 +45,14 @@ custom_minimum_size = Vector2(0, 20)
 [node name="GaugeContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=3008]
 alignment = 0
 
-[node name="GaugeBG" type="TextureRect" parent="GaugeContainer" unique_id=3009]
+[node name="GaugeBG" type="TextureProgressBar" parent="GaugeContainer" unique_id=3009]
 custom_minimum_size = Vector2(600, 60)
-texture = null
+under = ExtResource("3_bar_l")
+progress = ExtResource("2_bar")
+over = ExtResource("4_bar_r")
+clip_contents = true
+value = 0.0
+max_value = 600.0
 
 [node name="FailZone_Left" type="ColorRect" parent="GaugeBG" unique_id=3010]
 anchors_preset = 0

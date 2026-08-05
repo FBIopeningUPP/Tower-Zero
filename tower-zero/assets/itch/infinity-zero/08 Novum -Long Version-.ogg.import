@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c7rgj8tmmiped"
+path="res://.godot/imported/08 Novum -Long Version-.ogg-5c430f898bfced82f717af896dc51711.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/itch/infinity-zero/08 Novum -Long Version-.ogg"
+dest_files=["res://.godot/imported/08 Novum -Long Version-.ogg-5c430f898bfced82f717af896dc51711.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

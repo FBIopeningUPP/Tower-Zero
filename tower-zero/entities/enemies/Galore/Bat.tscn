@@ -1,0 +1,72 @@
+[gd_scene format=4 uid="uid://enemy_bat_001"]
+
+[ext_resource type="Script" path="res://entities/enemies/Galore/Bat.gd" id="1_enemy_gd"]
+[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Fly.png" id="4_fly"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Attack.png" id="5_attack"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Attack_FX.png" id="6_attack_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Death.png" id="7_death"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Death_FX.png" id="8_death_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Hit.png" id="9_hit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
+size = Vector2(40, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(56, 32)
+
+[node name="Bat" type="CharacterBody2D"]
+script = ExtResource("1_enemy_gd")
+collision_layer = 2
+collision_mask = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+frame_progress = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+position = Vector2(0, -16)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_hurtbox")
+position = Vector2(0, -16)
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+name = "AttackHitbox"
+collision_layer = 3
+collision_mask = 1
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("RectangleShape2D_hitbox")
+position = Vector2(32, -16)
+
+[node name="PatrolPath" type="Path2D" parent="."]
+
+[node name="DeathEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.4
+speed_scale = 1.5
+gravity = Vector2(0, 0)
+spread = 3.14
+scale = Vector2(0.4, 0.4)
+color_ramp = Gradient {
+	colors = [Color(0.5, 0.2, 0.5, 1), Color(0.3, 0.1, 0.3, 0.5), Color(0.5, 0.2, 0.5, 0)]
+}

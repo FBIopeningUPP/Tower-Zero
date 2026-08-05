@@ -1,6 +1,7 @@
-[gd_scene format=4 uid="uid://f1l2o3o4r5t6"]
+[gd_scene format=4 uid="uid://floor_transition_001"]
 
 [ext_resource type="Script" path="res://scenes/ui/FloorTransition.gd" id="1_trans"]
+[ext_resource type="Shader" path="res://assets/itch/godot-transitions/shader/transition.gdshader" id="2_shader"]
 
 [node name="FloorTransition" type="CanvasLayer" unique_id=4001]
 script = ExtResource("1_trans")
@@ -10,6 +11,9 @@ layer = 200
 anchors_preset = 0
 color = Color(0, 0, 0, 0)
 size = Vector2(1920, 1080)
+
+[node name="ShaderRect" type="ShaderMaterial" parent="."]
+shader = ExtResource("2_shader")
 
 [node name="FloorLabel" type="Label" parent="." unique_id=4003]
 anchors_preset = 5

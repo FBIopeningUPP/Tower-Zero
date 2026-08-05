@@ -1,0 +1,74 @@
+[gd_scene format=4 uid="uid://enemy_slime_001"]
+
+[ext_resource type="Script" path="res://entities/enemies/Galore/Slime.gd" id="1_enemy_gd"]
+[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Idle.png" id="4_idle"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Run.png" id="5_run"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Jump.png" id="6_jump"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Jump_FX.png" id="7_jump_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Ability.png" id="8_ability"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Ability_FX.png" id="9_ability_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Hit.png" id="10_hit"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Death.png" id="11_death"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(56, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
+size = Vector2(48, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(64, 40)
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_enemy_gd")
+collision_layer = 2
+collision_mask = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+frame_progress = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+position = Vector2(0, -20)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_hurtbox")
+position = Vector2(0, -20)
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+name = "AttackHitbox"
+collision_layer = 3
+collision_mask = 1
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("RectangleShape2D_hitbox")
+position = Vector2(36, -20)
+
+[node name="PatrolPath" type="Path2D" parent="."]
+
+[node name="AbilityEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 25
+lifetime = 0.5
+speed_scale = 1.0
+gravity = Vector2(0, -15)
+spread = 2.5
+scale = Vector2(0.5, 0.5)
+color_ramp = Gradient {
+	colors = [Color(0.2, 0.8, 0.4, 1), Color(0.1, 0.5, 0.2, 0.5), Color(0.2, 0.8, 0.4, 0)]
+}

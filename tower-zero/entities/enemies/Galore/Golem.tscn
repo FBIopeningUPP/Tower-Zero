@@ -1,0 +1,108 @@
+[gd_scene format=4 uid="uid://enemy_golem_001"]
+
+[ext_resource type="Script" path="res://entities/enemies/Galore/Golem.gd" id="1_enemy_gd"]
+[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_IdleA.png" id="4_idle_a"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_IdleB.png" id="5_idle_b"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_Run.png" id="6_run"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_AttackA.png" id="7_attack_a"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_AttackA_FX.png" id="8_attack_a_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_AttackB.png" id="9_attack_b"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_AttackB_FX.png" id="10_attack_b_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_AttackC.png" id="11_attack_c"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_AttackC_FX.png" id="12_attack_c_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_HitA.png" id="13_hit_a"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_HitB.png" id="14_hit_b"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_DeathA.png" id="15_death_a"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_DeathB.png" id="16_death_b"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_Death_FX.png" id="17_death_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_Upgrade.png" id="18_upgrade"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_Idle.png" id="19_armor_idle"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_Run.png" id="20_armor_run"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_AttackA.png" id="21_armor_attack_a"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_AttackA_FX.png" id="22_armor_attack_a_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_AttackB.png" id="23_armor_attack_b"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_AttackB_FX.png" id="24_armor_attack_b_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_AttackC.png" id="25_armor_attack_c"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_AttackC_FX.png" id="26_armor_attack_c_fx"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_Hit.png" id="27_armor_hit"]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/Armored/Golem_Armor_ArmorBreak.png" id="28_armor_break"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(72, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
+size = Vector2(64, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(96, 64)
+
+[node name="Golem" type="CharacterBody2D"]
+script = ExtResource("1_enemy_gd")
+collision_layer = 2
+collision_mask = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -56)
+scale = Vector2(2, 2)
+frame_progress = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+position = Vector2(0, -56)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_hurtbox")
+position = Vector2(0, -56)
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+name = "AttackHitbox"
+collision_layer = 3
+collision_mask = 1
+monitoring = false
+monitorable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("RectangleShape2D_hitbox")
+position = Vector2(54, -56)
+
+[node name="ArmorSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -56)
+scale = Vector2(2, 2)
+visible = true
+
+[node name="PatrolPath" type="Path2D" parent="."]
+
+[node name="DeathEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 0.8
+speed_scale = 2.0
+gravity = Vector2(0, 0)
+spread = 3.14
+scale = Vector2(0.8, 0.8)
+color_ramp = Gradient {
+	colors = [Color(0.6, 0.4, 0.2, 1), Color(0.8, 0.5, 0.2, 0.5), Color(0.6, 0.4, 0.2, 0)]
+}
+
+[node name="ArmorBreakEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+lifetime = 0.5
+speed_scale = 3.0
+gravity = Vector2(0, -50)
+spread = 2.0
+scale = Vector2(0.6, 0.6)
+color_ramp = Gradient {
+	colors = [Color(0.8, 0.7, 0.5, 1), Color(0.6, 0.5, 0.3, 0.5), Color(0.8, 0.7, 0.5, 0)]
+}

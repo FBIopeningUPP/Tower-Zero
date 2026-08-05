@@ -1,52 +1,98 @@
-[gd_scene format=3 uid="uid://tqkfqv1fkj1i"]
+[gd_scene format=4 uid="uid://player_striker_001"]
 
-[ext_resource type="Script" uid="uid://f6u1r7mb4an7" path="res://entities/player/Player.gd" id="1_453mm"]
-[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="1_mab2k"]
-[ext_resource type="Script" uid="uid://clwid7o1uos2" path="res://components/HealthComponent.gd" id="3_eaotn"]
-[ext_resource type="Script" uid="uid://buytlmqy4ibnf" path="res://components/HurtboxComponent.gd" id="4_g3lhm"]
-[ext_resource type="Script" uid="uid://bws6rd0o0y2qj" path="res://components/HitboxComponent.gd" id="5_g3lhm"]
+[ext_resource type="Script" path="res://entities/player/Player.gd" id="1_player_gd"]
+[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="PackedScene" path="res://components/HurtboxComponent.gd" id="4_hurtbox"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerIdle_strip.png" id="5_idle"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerRun_strip.png" id="6_run"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerJump_strip.png" id="7_jump"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerDash_strip.png" id="8_dash"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerSlash_stripWithEffect.png" id="9_slash"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerDeath_strip.png" id="10_death"]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerGetHit_strip.png" id="11_hit"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/Projectile.tscn" id="12_projectile"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/MuzzleFlash.tscn" id="13_muzzle"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a6jk"]
-radius = 64.0
-height = 128.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(48, 96)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_180yc"]
-radius = 67.5
-height = 135.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurtbox"]
+size = Vector2(40, 90)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
-size = Vector2(80, 140)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(80, 48)
 
-[node name="Player" type="CharacterBody2D" unique_id=484063914 groups=["Player"]]
-collision_layer = 2
-script = ExtResource("1_453mm")
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player_gd")
+collision_layer = 1
+collision_mask = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=4198736]
-texture = ExtResource("1_mab2k")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -48)
+scale = Vector2(2, 2)
+frame_progress = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=153392527]
-shape = SubResource("CapsuleShape2D_1a6jk")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+position = Vector2(0, -48)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1629168779]
-zoom = Vector2(0.6, 0.6)
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = true
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+zoom = Vector2(0.6, 0.6)
 
-[node name="HealthComponent" type="Node" parent="." unique_id=428759908]
-script = ExtResource("3_eaotn")
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
 
-[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1009358373 node_paths=PackedStringArray("health_component")]
-script = ExtResource("4_g3lhm")
-health_component = NodePath("../HealthComponent")
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 1
+monitoring = true
+monitorable = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1936574610]
-shape = SubResource("CapsuleShape2D_180yc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_hurtbox")
+position = Vector2(0, -48)
 
-[node name="SwordHitbox" type="Area2D" parent="." unique_id=416743579]
+[node name="HitboxComponent" type="Area2D" parent="."]
+name = "SwordHitbox"
+collision_layer = 3
+collision_mask = 2
 monitoring = false
-script = ExtResource("5_g3lhm")
-damage = 40
+monitorable = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox" unique_id=2143761060]
-position = Vector2(83, 0)
-shape = SubResource("RectangleShape2D_sword")
-disabled = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox"]
+shape = SubResource("RectangleShape2D_hitbox")
+position = Vector2(60, -48)
+
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(48, -48)
+
+[node name="MuzzleFlashPoint" type="Marker2D" parent="."]
+position = Vector2(56, -48)
+
+[node name="DashEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.3
+speed_scale = 2.0
+gravity = Vector2(0, 0)
+spread = 3.14
+scale = Vector2(0.5, 0.5)
+color_ramp = Gradient {
+	colors = [Color(0, 1, 1, 1), Color(0, 0.5, 1, 0.5), Color(0, 1, 1, 0)]
+}
+
+[node name="SlashEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 15
+lifetime = 0.2
+speed_scale = 1.0
+gravity = Vector2(0, 0)
+spread = 1.5
+scale = Vector2(0.3, 0.3)
+color_ramp = Gradient {
+	colors = [Color(1, 1, 1, 1), Color(1, 1, 1, 0.5), Color(1, 1, 1, 0)]
+}
