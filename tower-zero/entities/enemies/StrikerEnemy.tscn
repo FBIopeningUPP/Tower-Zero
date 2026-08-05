@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://entities/enemies/StrikerEnemy.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
-[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerIdle_strip.png" id="4_idle"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerRun_strip.png" id="5_run"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerJump_strip.png" id="6_jump"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerDash_strip.png" id="7_dash"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerSlash_stripWithEffect.png" id="8_slash"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerDeath_strip.png" id="9_death"]
-[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerGetHit_strip.png" id="10_hit"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id=3]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerIdle_strip.png" id=4]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerRun_strip.png" id=5]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerJump_strip.png" id=6]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerDash_strip.png" id=7]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerSlash_stripWithEffect.png" id=8]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerDeath_strip.png" id=9]
+[ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerGetHit_strip.png" id=10]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(48, 96)

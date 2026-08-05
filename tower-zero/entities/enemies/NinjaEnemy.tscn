@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://entities/enemies/NinjaEnemy.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
-[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
-[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - idle.png" id="4_idle"]
-[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - walk.png" id="5_walk"]
-[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - attack.png" id="6_attack"]
-[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - hit.png" id="7_hit"]
-[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - Death.png" id="8_death"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id=3]
+[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - idle.png" id=4]
+[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - walk.png" id=5]
+[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - attack.png" id=6]
+[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - hit.png" id=7]
+[ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - Death.png" id=8]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(48, 96)

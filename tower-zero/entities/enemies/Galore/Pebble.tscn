@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://entities/enemies/Galore/Pebble.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
-[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
-[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Idle.png" id="4_idle"]
-[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Run.png" id="5_run"]
-[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Hit.png" id="6_hit"]
-[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Death.png" id="7_death"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id=3]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Idle.png" id=4]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Run.png" id=5]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Hit.png" id=6]
+[ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Pebble/Pebble_Death.png" id=7]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(24, 24)

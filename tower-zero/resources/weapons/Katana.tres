@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponResource" format=3]
 
 [resource]
-script = ExtResource("1_gd")
+script = null
 damage = 25
 attack_speed = 2.5
 range = 80.0
@@ -9,8 +9,8 @@ energy_cost = 0
 cooldown = 0.15
 element = 0
 weapon_type = 0
-projectile_scene = ExtResource("")
-muzzle_scene = ExtResource("")
+projectile_scene = null
+muzzle_scene = null
 hitbox_shape = 0
 hitbox_size = Vector2(96, 48)
 hitbox_offset = Vector2(60, -48)
