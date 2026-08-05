@@ -1,5 +1,4 @@
 extends Node
-class_name RunState
 
 signal floor_changed(floor: int)
 signal draft_ready(card_count: int)
@@ -234,7 +233,7 @@ func _save() -> void:
 	}
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	if file:
-		file.store_string(JSON.print(save_data))
+		file.store_string(JSON.stringify(save_data))
 
 func _load_save() -> void:
 	var file = FileAccess.open("user://save.json", FileAccess.READ)

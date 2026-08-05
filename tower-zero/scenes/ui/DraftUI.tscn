@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://draft_ui_001"]
 
-[ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id="1_draft"]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/panel_round_gloss_large.png" id="2_panel"]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/button_square_header_large_rectangle.png" id="3_btn"]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/button_square_header_large_rectangle_screws.png" id="4_btn_pressed"]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large.png" id="5_bar"]
+[ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id=1]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/panel_round_gloss_large.png" id=2]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/button_square_header_large_rectangle.png" id=3]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/button_square_header_large_rectangle_screws.png" id=4]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large.png" id=5]
 
 [node name="DraftUI" type="CanvasLayer" unique_id=5001]
-script = ExtResource("1_draft")
+script = ExtResource(1)
 layer = 100
 process_mode = 3
 visible = false
@@ -40,7 +40,7 @@ separation = 40.0
 
 [node name="Card1" type="PanelContainer" parent="CardContainer"]
 custom_minimum_size = Vector2(400, 500)
-theme_override_textures/panel = ExtResource("2_panel")
+theme_override_textures/panel = ExtResource(2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Card1"]
 alignment = 0
@@ -64,8 +64,8 @@ modulate = Color(0.9, 0.9, 0.9, 1.0)
 
 [node name="SelectBtn1" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 60)
-texture_normal = ExtResource("3_btn")
-texture_pressed = ExtResource("4_btn_pressed")
+texture_normal = ExtResource(3)
+texture_pressed = ExtResource(4)
 stretch_mode = 1
 
 [node name="BtnLabel1" type="Label" parent="SelectBtn1"]
@@ -81,7 +81,7 @@ text = "SELECT"
 
 [node name="Card2" type="PanelContainer" parent="CardContainer"]
 custom_minimum_size = Vector2(400, 500)
-theme_override_textures/panel = ExtResource("2_panel")
+theme_override_textures/panel = ExtResource(2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Card2"]
 alignment = 0
@@ -105,8 +105,8 @@ modulate = Color(0.9, 0.9, 0.9, 1.0)
 
 [node name="SelectBtn2" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 60)
-texture_normal = ExtResource("3_btn")
-texture_pressed = ExtResource("4_btn_pressed")
+texture_normal = ExtResource(3)
+texture_pressed = ExtResource(4)
 stretch_mode = 1
 
 [node name="BtnLabel2" type="Label" parent="SelectBtn2"]
@@ -122,7 +122,7 @@ text = "SELECT"
 
 [node name="Card3" type="PanelContainer" parent="CardContainer"]
 custom_minimum_size = Vector2(400, 500)
-theme_override_textures/panel = ExtResource("2_panel")
+theme_override_textures/panel = ExtResource(2)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Card3"]
 alignment = 0
@@ -146,8 +146,8 @@ modulate = Color(0.9, 0.9, 0.9, 1.0)
 
 [node name="SelectBtn3" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 60)
-texture_normal = ExtResource("3_btn")
-texture_pressed = ExtResource("4_btn_pressed")
+texture_normal = ExtResource(3)
+texture_pressed = ExtResource(4)
 stretch_mode = 1
 
 [node name="BtnLabel3" type="Label" parent="SelectBtn3"]

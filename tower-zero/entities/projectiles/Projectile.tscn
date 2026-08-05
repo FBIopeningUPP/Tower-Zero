@@ -1,19 +1,19 @@
 [gd_scene format=4 uid="uid://projectile_base_001"]
 
-[ext_resource type="Script" path="res://entities/projectiles/Projectile.gd" id="1_proj_gd"]
-[ext_resource type="Texture2D" path="res://assets/itch/eradication-wars-weapons/Tiny Bonus/tiny projectiles/micro projectile (1).png" id="2_proj_tex"]
-[ext_resource type="PackedScene" path="res://entities/projectiles/MuzzleFlash.tscn" id="3_muzzle"]
+[ext_resource type="Script" path="res://entities/projectiles/Projectile.gd" id=1]
+[ext_resource type="Texture2D" path="res://assets/itch/eradication-wars-weapons/Tiny Bonus/tiny projectiles/micro projectile (1).png" id=2]
+[ext_resource type="PackedScene" path="res://entities/projectiles/MuzzleFlash.tscn" id=3]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_proj"]
 size = Vector2(24, 12)
 
 [node name="Projectile" type="Area2D"]
-script = ExtResource("1_proj_gd")
+script = ExtResource(1)
 collision_layer = 3
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_proj_tex")
+texture = ExtResource(2)
 scale = Vector2(4, 4)
 centered = true
 

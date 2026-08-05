@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://ci15xy01abc2d"]
 
-[ext_resource type="Script" uid="uid://k3sbehneyrbt" path="res://entities/enemies/Drone.gd" id="1_drone"]
-[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_rfvys"]
-[ext_resource type="Script" uid="uid://bws6rd0o0y2qj" path="res://components/HitboxComponent.gd" id="3_i8idp"]
-[ext_resource type="Script" uid="uid://clwid7o1uos2" path="res://components/HealthComponent.gd" id="4_i8idp"]
-[ext_resource type="Script" uid="uid://buytlmqy4ibnf" path="res://components/HurtboxComponent.gd" id="5_ae7xc"]
+[ext_resource type="Script" path="res://entities/enemies/Drone.gd" id=1]
+[ext_resource type="Texture2D" path="res://icon.svg" id=2]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id=3]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id=4]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id=5]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a6jk"]
 radius = 64.0
@@ -21,27 +21,27 @@ height = 140.0
 [node name="Drone" type="CharacterBody2D" unique_id=1764206993]
 scale = Vector2(0.7, 0.7)
 collision_layer = 4
-script = ExtResource("1_drone")
+script = ExtResource(1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1293403859]
 modulate = Color(0.5, 0, 1, 1)
-texture = ExtResource("2_rfvys")
+texture = ExtResource(2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1742364244]
 shape = SubResource("CapsuleShape2D_1a6jk")
 
 [node name="HitboxComponent" type="Area2D" parent="." unique_id=2129121806]
-script = ExtResource("3_i8idp")
+script = ExtResource(3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1007400689]
 shape = SubResource("CapsuleShape2D_180yc")
 disabled = true
 
 [node name="HealthComponent" type="Node" parent="." unique_id=28321120]
-script = ExtResource("4_i8idp")
+script = ExtResource(4)
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=500877970 node_paths=PackedStringArray("health_component")]
-script = ExtResource("5_ae7xc")
+script = ExtResource(5)
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1684625803]

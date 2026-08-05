@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://enemy_ninja_001"]
 
-[ext_resource type="Script" path="res://entities/enemies/NinjaEnemy.gd" id="1_enemy_gd"]
-[ext_resource type="Script" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="Script" path="res://entities/enemies/NinjaEnemy.gd" id=1]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
 [ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
 [ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - idle.png" id="4_idle"]
 [ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - walk.png" id="5_walk"]
@@ -19,7 +19,7 @@ size = Vector2(40, 90)
 size = Vector2(72, 48)
 
 [node name="NinjaEnemy" type="CharacterBody2D"]
-script = ExtResource("1_enemy_gd")
+script = ExtResource(1)
 collision_layer = 2
 collision_mask = 1
 
@@ -33,7 +33,7 @@ shape = SubResource("RectangleShape2D_body")
 position = Vector2(0, -48)
 
 [node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("2_health")
+script = ExtResource(2)
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 2
