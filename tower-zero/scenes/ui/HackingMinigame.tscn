@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://h1a2c3k4i5n6"]
+[gd_scene format=4 uid="uid://h1a2c3k4i5n6"]
 
 [ext_resource type="Script" path="res://scenes/ui/HackingMinigame.gd" id="1_hack"]
 
@@ -49,14 +49,14 @@ color = Color(1, 0.2, 0.2, 0.8)
 offset_right = 120.0
 size = Vector2(120, 60)
 
-[node name="OkZone" type="ColorRect" parent="GaugeBG" unique_id=3011"]
+[node name="OkZone" type="ColorRect" parent="GaugeBG" unique_id=3011]
 anchors_preset = 0
 color = Color(1, 0.9, 0.2, 0.8)
 offset_left = 120.0
 offset_right = 480.0
 size = Vector2(360, 60)
 
-[node name="PerfectZone" type="ColorRect" parent="GaugeBG" unique_id=3012"]
+[node name="PerfectZone" type="ColorRect" parent="GaugeBG" unique_id=3012]
 anchors_preset = 0
 color = Color(0.2, 1, 0.4, 0.9)
 offset_left = 240.0
@@ -71,43 +71,43 @@ offset_top = 0.0
 offset_right = 8.0
 offset_bottom = 60.0
 
-[node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=3014"]
+[node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=3014]
 custom_minimum_size = Vector2(0, 15)
 
-[node name="Legend" type="HBoxContainer" parent="VBoxContainer" unique_id=3015"]
+[node name="Legend" type="HBoxContainer" parent="VBoxContainer" unique_id=3015]
 alignment = 0
 
-[node name="FailLabel" type="Label" parent="Legend" unique_id=3016"]
+[node name="FailLabel" type="Label" parent="Legend" unique_id=3016]
 text = "[FAIL] 2 CARDS"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 18
 modulate = Color(1, 0.4, 0.4, 1.0)
 custom_minimum_size = Vector2(200, 0)
 
-[node name="OkLabel" type="Label" parent="Legend" unique_id=3017"]
+[node name="OkLabel" type="Label" parent="Legend" unique_id=3017]
 text = "[OK] 3 CARDS"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 18
 modulate = Color(1, 1, 0.4, 1.0)
 custom_minimum_size = Vector2(200, 0)
 
-[node name="PerfectLabel" type="Label" parent="Legend" unique_id=3018"]
+[node name="PerfectLabel" type="Label" parent="Legend" unique_id=3018]
 text = "[PERFECT] 4 CARDS"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 18
 modulate = Color(0.4, 1, 0.6, 1.0)
 custom_minimum_size = Vector2(200, 0)
 
-[node name="Spacer3" type="Control" parent="VBoxContainer" unique_id=3019"]
+[node name="Spacer3" type="Control" parent="VBoxContainer" unique_id=3019]
 custom_minimum_size = Vector2(0, 10)
 
-[node name="TimerLabel" type="Label" parent="VBoxContainer" unique_id=3020"]
+[node name="TimerLabel" type="Label" parent="VBoxContainer" unique_id=3020]
 text = "TIME: 3.0s"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 24
 modulate = Color(1, 1, 1, 1.0)
 
-[node name="Instruction" type="Label" parent="VBoxContainer" unique_id=3021"]
+[node name="Instruction" type="Label" parent="VBoxContainer" unique_id=3021]
 text = "PRESS E TO STOP"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 20

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d1r2a3f4t5u6"]
+[gd_scene format=4 uid="uid://d1r2a3f4t5u6"]
 
 [ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id="1_draft"]
 
