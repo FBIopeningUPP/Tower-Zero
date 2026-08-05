@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d7h8j2k9l3m4"]
 
 [ext_resource type="Script" path="res://scenes/objects/ExitDoor.gd" id="1_door"]
 [ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_icon"]
@@ -6,15 +6,40 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
 size = Vector2(128, 256)
 
+[sub_resource type="Animation" id="Animation_idle"]
+length = 1.0
+loop_wrap_mode = 0
+step = 0.1
+tracks = [{
+	"type": "value",
+	"path": NodePath("Sprite2D:modulate:a"),
+	"interp": 1,
+	"loop_wrap_mode": 0,
+	"imported": false,
+	"enabled": true,
+	"keys": {
+		0: 0.5,
+		0.5: 1.0,
+		1.0: 0.5
+	}
+}]
+
 [node name="ExitDoor" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_door")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-scale = Vector2(1, 2)
+modulate = Color(0.2, 0.8, 1.0, 1.0)
+scale = Vector2(0.5, 0.5)
+position = Vector2(0, -64)
 texture = ExtResource("2_icon")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_door")
+position = Vector2(0, -64)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+animations = {
+	"idle": SubResource("Animation_idle")
+}
