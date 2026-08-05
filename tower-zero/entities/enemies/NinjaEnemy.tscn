@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://enemy_ninja_001"]
 
 [ext_resource type="Script" path="res://entities/enemies/NinjaEnemy.gd" id="1_enemy_gd"]
-[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
-[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
 [ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - idle.png" id="4_idle"]
 [ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - walk.png" id="5_walk"]
 [ext_resource type="Texture2D" path="res://assets/itch/ninja-enemy/YellowNinja/yellowNinja - attack.png" id="6_attack"]

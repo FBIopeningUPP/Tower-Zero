@@ -7,15 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_proj"]
 size = Vector2(24, 12)
 
-[node name="Projectile" type="RigidBody2D"]
+[node name="Projectile" type="Area2D"]
 script = ExtResource("1_proj_gd")
 collision_layer = 3
 collision_mask = 2
-mass = 0.1
-gravity_scale = 0.0
-linear_damp = 0.0
-angular_damp = 0.0
-mode = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_proj_tex")
@@ -29,6 +24,8 @@ shape = SubResource("RectangleShape2D_proj")
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[connection signal="timeout" from="Timer" to="Projectile" method="_on_timer_timeout"]
 
 [node name="TrailParticles" type="CPUParticles2D" parent="."]
 emitting = true

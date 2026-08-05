@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://enemy_golem_001"]
 
 [ext_resource type="Script" path="res://entities/enemies/Galore/Golem.gd" id="1_enemy_gd"]
-[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
-[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_IdleA.png" id="4_idle_a"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_IdleB.png" id="5_idle_b"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_Run.png" id="6_run"]

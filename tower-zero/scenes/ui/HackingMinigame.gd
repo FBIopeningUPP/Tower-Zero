@@ -66,7 +66,7 @@ func _update_timer(delta: float) -> void:
 	_update_timer_display()
 
 func _update_timer_display() -> void:
-	timer_label.text = "TIME: " + String.format("%.1f", [time_remaining]) + "s"
+	timer_label.text = "TIME: " + str(round(time_remaining, 1)) + "s"
 	
 	if time_remaining <= 1.0:
 		timer_label.modulate = Color(1, 0.3, 0.3, 1)
@@ -104,7 +104,7 @@ func _finish_hacking(res: int) -> void:
 	_show_result_feedback()
 	
 	var tween = create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_MODE_PROCESS)
+	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	tween.tween_callback(_emit_result.bind(result)).set_delay(1.0)
 	tween.tween_callback(queue_free.bind()).set_delay(1.5)
 

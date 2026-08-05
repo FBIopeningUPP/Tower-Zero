@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://enemy_rat_001"]
 
 [ext_resource type="Script" path="res://entities/enemies/Galore/Rat.gd" id="1_enemy_gd"]
-[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
-[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Rat/Rat_Idle.png" id="4_idle"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Rat/Rat_Run.png" id="5_run"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Rat/Rat_Attack.png" id="6_attack"]

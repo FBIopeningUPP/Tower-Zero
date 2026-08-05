@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://player_striker_001"]
 
 [ext_resource type="Script" path="res://entities/player/Player.gd" id="1_player_gd"]
-[ext_resource type="PackedScene" path="res://components/HealthComponent.gd" id="2_health"]
-[ext_resource type="PackedScene" path="res://components/HitboxComponent.gd" id="3_hitbox"]
-[ext_resource type="PackedScene" path="res://components/HurtboxComponent.gd" id="4_hurtbox"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="2_health"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="4_hurtbox"]
 [ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerIdle_strip.png" id="5_idle"]
 [ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerRun_strip.png" id="6_run"]
 [ext_resource type="Texture2D" path="res://assets/itch/cyberpunk-characters/spr_StrikerJump_strip.png" id="7_jump"]
@@ -28,7 +28,7 @@ script = ExtResource("1_player_gd")
 collision_layer = 1
 collision_mask = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -48)
 scale = Vector2(2, 2)
 frame_progress = 0.0
@@ -56,8 +56,7 @@ monitorable = true
 shape = SubResource("RectangleShape2D_hurtbox")
 position = Vector2(0, -48)
 
-[node name="HitboxComponent" type="Area2D" parent="."]
-name = "SwordHitbox"
+[node name="SwordHitbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 2
 monitoring = false

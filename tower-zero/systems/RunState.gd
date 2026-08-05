@@ -6,31 +6,18 @@ signal draft_ready(card_count: int)
 signal run_ended(final_floor: int, total_kills: int, total_shards: int)
 
 var current_floor: int = 1
-var total_kills: int = 1
+var total_kills: int = 0
 var total_shards: int = 0
-var drafted_cards: Array[Dictionary] = []
-var player_stats: Dictionary = {
-	"max_hp": 100,
-	"max_energy": 100,
-	"sword_damage": 40,
-	"blaster_damage": 20,
-	"run_speed": 300,
-	"jump_velocity": -400,
-	"dash_speed": 800,
-	"dash_duration": 0.2,
-	"double_jumps": 1,
-	"energy_per_kill": 0,
-	"hp_per_kill": 0,
-	"damage_reduction": 0.0
-}
+var drafted_cards: Array = []
+var player_stats: Dictionary = {}
 
-var active_wepon_primary: String = "Sword"
-var active_wepon_secondary: String = "Blaster"
-var unlocked_characters: Array[String] = ["Default"]
+var active_weapon_primary: String = "Sword"
+var active_weapon_secondary: String = "Blaster"
+var unlocked_characters: Array = ["Default"]
 var selected_character: String = "Default"
 var permanent_upgrades: Dictionary = {}
-var modifiers: Array[String] = []
-var modifier_multiplier: float = 1
+var modifiers: Array = []
+var modifier_multiplier: float = 1.0
 var best_floor: int = 1
 var total_runs: int = 0
 var tutorial_completed: bool = false
@@ -45,7 +32,7 @@ var biome_colors: Dictionary = {
 
 func _ready() -> void:
 	_load_save()
-	
+
 func start_new_run() -> void:
 	current_floor = 1
 	total_kills = 0
@@ -55,7 +42,7 @@ func start_new_run() -> void:
 	_apply_permanent_upgrades()
 	_apply_character_passive()
 	_apply_modifiers()
-	floor_changed.emit(current_floor)
+	emit_signal("floor_changed", current_floor)
 	_save()
 
 func _reset_player_stats_to_base() -> void:
@@ -75,112 +62,101 @@ func _reset_player_stats_to_base() -> void:
 	}
 
 func _apply_permanent_upgrades() -> void:
-	for upgrade_id in permanent_upgrades:
+	for upgrade_id in permanent_upgrades.keys():
 		var level = permanent_upgrades[upgrade_id]
 		match upgrade_id:
 			"starting_hp":
-				player_stats.max_hp += [0, 25, 50, 100][level]
+				player_stats["max_hp"] += [0, 25, 50, 100][level]
 			"starting_energy":
-				player_stats.max_energy += [0, 25, 50, 100][level]
+				player_stats["max_energy"] += [0, 25, 50, 100][level]
 			"sword_damage":
-				player_stats.sword_damage += [0, 10, 20][level]
+				player_stats["sword_damage"] += [0, 10, 20][level]
 			"blaster_damage":
-				player_stats.blaster_damage += [0, 5, 10][level]
+				player_stats["blaster_damage"] += [0, 5, 10][level]
 			"dash_duration":
-				player_stats.dash_duration += [0.0, 0.05, 0.1][level]
+				player_stats["dash_duration"] += [0.0, 0.05, 0.1][level]
 			"triple_jump":
 				if level > 0:
-					player_stats.double_jumps = 2
-			"head_start":
-				pass
-			"card_pool_plus":
-				pass
+					player_stats["double_jumps"] = 2
 
 func _apply_character_passive() -> void:
 	match selected_character:
 		"Berserker":
-			player_stats.sword_damage = int(player_stats.sword_damage * 1.5)
-			player_stats.max_hp = int(player_stats.max_hp * 0.75)
+			player_stats["sword_damage"] = int(player_stats["sword_damage"] * 1.5)
+			player_stats["max_hp"] = int(player_stats["max_hp"] * 0.75)
 		"Hacker":
-			player_stats.max_energy = int(player_stats.max_energy * 1.5)
-			player_stats.sword_damage = int(player_stats.sword_damage * 0.75)
-			player_stats.energy_per_kill += 5
+			player_stats["max_energy"] = int(player_stats["max_energy"] * 1.5)
+			player_stats["sword_damage"] = int(player_stats["sword_damage"] * 0.75)
+			player_stats["energy_per_kill"] += 5
 		"Ghost":
-			player_stats.dash_speed = int(player_stats.dash_speed * 1.5)
-			player_stats.dash_duration *= 2.0
-			player_stats.max_hp = int(player_stats.max_hp * 0.5)
+			player_stats["dash_speed"] = int(player_stats["dash_speed"] * 1.5)
+			player_stats["dash_duration"] *= 2.0
+			player_stats["max_hp"] = int(player_stats["max_hp"] * 0.5)
 
-func _apply_modifers() -> void:
-	modifiers_multiplier = 1
+func _apply_modifiers() -> void:
+	modifier_multiplier = 1.0
 	for mod in modifiers:
 		match mod:
 			"glass_cannon":
-				player_stats.sword_damage = int(player_stats.sword_damage * 2)
-				player_stats.blaster_damage = int(player_stats.blaster_damage * 2)
-				player_stats.max_hp = int(player_stats.max_hp * 0.5)
+				player_stats["sword_damage"] = int(player_stats["sword_damage"] * 2)
+				player_stats["blaster_damage"] = int(player_stats["blaster_damage"] * 2)
+				player_stats["max_hp"] = int(player_stats["max_hp"] * 0.5)
 				modifier_multiplier *= 1.5
 			"bullet_hell":
 				modifier_multiplier *= 2.0
 			"speedrun":
 				modifier_multiplier *= 1.5
 			"one_hit":
-				player_stats.max_hp = 1
+				player_stats["max_hp"] = 1
 				modifier_multiplier *= 3.0
 			"pacifist":
-				player_stats.sword_damage = 0
-				player_stats.energy_per_kill += 10
+				player_stats["sword_damage"] = 0
+				player_stats["energy_per_kill"] += 10
 				modifier_multiplier *= 2.0
 
 func advance_floor() -> void:
 	current_floor += 1
 	if current_floor > best_floor:
-		best_floor =  current_floor
-	floor_changed.emit(current_floor)
-	_save()
-
-func advance_floor() -> void:
-	current_floor += 1
-	if current_floor > best_floor:
-		best_floor = current_flloor
-	floor_changed.emit(current_floor)
+		best_floor = current_floor
+	emit_signal("floor_changed", current_floor)
 	_save()
 
 func add_kill(xp: int) -> void:
 	total_kills += 1
 	total_shards += int(5 * modifier_multiplier)
 
-func add_boss_kill() -> void
+func add_boss_kill() -> void:
 	total_shards += int(50 * modifier_multiplier)
 
 func add_drafted_card(card_data: Dictionary) -> void:
 	drafted_cards.append(card_data)
 
 func _apply_card_to_stats(card: Dictionary) -> void:
-	var type = card.effect_type
-	var value - card.effect_value
-	match type:
+	var t = card.get("effect_type", "")
+	var value = card.get("effect_value", 0)
+	match t:
 		"max_hp":
-			player_stats.max_hp += int(value)
+			player_stats["max_hp"] += int(value)
 		"max_energy":
-			player_stats.max_energy += int(value)
+			player_stats["max_energy"] += int(value)
 		"sword_damage":
-			player_stats.sword_damage += int(value)
+			player_stats["sword_damage"] += int(value)
 		"blaster_damage":
-			player_stats.blaster_damage += int(value)
+			player_stats["blaster_damage"] += int(value)
 		"run_speed":
-			player_stats.run_speed += value
+			player_stats["run_speed"] += value
 		"jump_power":
-			player_stats.jump_velocity -= value
+			player_stats["jump_velocity"] -= value
 		"dash_speed":
-			player_stats.dash_speed += value
+			player_stats["dash_speed"] += value
 		"energy_per_kill":
-			player_stats.energy_per_kill += value
+			player_stats["energy_per_kill"] += value
 		"hp_per_kill":
-			player_stats.hp_per_kill += value
+			player_stats["hp_per_kill"] += value
 		"damage_reduction":
-			player_stats.damage_reduction += value / 100.0
+			player_stats["damage_reduction"] += value / 100.0
 		"double_jump":
-			player_stats.double_jumps += int(value)
+			player_stats["double_jumps"] += int(value)
 
 func get_draft_card_count(hacking_result: int) -> int:
 	match hacking_result:
@@ -193,7 +169,7 @@ func get_current_biome() -> String:
 	if current_floor <= 3: return "Office"
 	if current_floor <= 6: return "Server"
 	if current_floor <= 9: return "Lab"
-	if current_floor <= 12: return "Foundary"
+	if current_floor <= 12: return "Foundry"
 	return "Core"
 
 func get_biome_color() -> Color:
@@ -201,7 +177,7 @@ func get_biome_color() -> Color:
 
 func end_run() -> void:
 	total_runs += 1
-	run_ended.emit(current_floor, total_kills, total_shards)
+	emit_signal("run_ended", current_floor, total_kills, total_shards)
 	_save()
 
 func purchase_upgrade(upgrade_id: String) -> bool:
@@ -216,6 +192,8 @@ func purchase_upgrade(upgrade_id: String) -> bool:
 		"card_pool_plus": [200]
 	}
 	var current_level = permanent_upgrades.get(upgrade_id, 0)
+	if not costs.has(upgrade_id):
+		return false
 	if current_level >= costs[upgrade_id].size():
 		return false
 	var cost = costs[upgrade_id][current_level]
@@ -228,10 +206,10 @@ func purchase_upgrade(upgrade_id: String) -> bool:
 
 func unlock_character(character: String) -> void:
 	if character not in unlocked_characters:
-		unlcoked_characters.append(character)
+		unlocked_characters.append(character)
 		_save()
 
-func select_character(characer: String) -> void:
+func select_character(character: String) -> void:
 	if character in unlocked_characters:
 		selected_character = character
 		_save()
@@ -256,13 +234,14 @@ func _save() -> void:
 	}
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	if file:
-		file.store_string(JSON.stringify(save_data))
+		file.store_string(JSON.print(save_data))
 
 func _load_save() -> void:
 	var file = FileAccess.open("user://save.json", FileAccess.READ)
 	if file:
-		var data = JSON.parse_string(file.get_as_text())
-		if data:
+		var text = file.get_as_text()
+		var data = JSON.parse_string(text)
+		if data and typeof(data) == TYPE_DICTIONARY:
 			total_shards = data.get("total_shards", 0)
 			permanent_upgrades = data.get("upgrades_purchased", {})
 			unlocked_characters = data.get("characters_unlocked", ["Default"])
