@@ -1,17 +1,17 @@
 [gd_scene format=4]
 
-[ext_resource type="PackedScene" path="res://entities/player/Player.tscn" id="1_player"]
-[ext_resource type="Script" path="res://scenes/levels/TestWorld.gd" id="2_testworld"]
-[ext_resource type="Script" path="res://systems/FloorManager.gd" id="3_floor_mgr"]
-[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="4_hud"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="5_icon"]
-[ext_resource type="PackedScene" path="res://scenes/objects/ExitDoor.tscn" id="6_exit"]
-[ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id="7_draft"]
-[ext_resource type="PackedScene" path="res://systems/ProjectilePool.tscn" id="8_pool"]
-[ext_resource type="PackedScene" path="res://scenes/ui/FloorTransition.tscn" id="9_transition"]
+[ext_resource type="PackedScene" path="res://entities/player/Player.tscn" id=1]
+[ext_resource type="Script" path="res://scenes/levels/TestWorld.gd" id=2]
+[ext_resource type="Script" path="res://systems/FloorManager.gd" id=3]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id=4]
+[ext_resource type="Texture2D" path="res://icon.svg" id=5]
+[ext_resource type="PackedScene" path="res://scenes/objects/ExitDoor.tscn" id=6]
+[ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id=7]
+[ext_resource type="PackedScene" path="res://systems/ProjectilePool.tscn" id=8]
+[ext_resource type="PackedScene" path="res://scenes/ui/FloorTransition.tscn" id=9]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_industrial"]
-texture = ExtResource("5_icon")
+texture = ExtResource(5)
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
@@ -21,25 +21,25 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_industrial")
 
 [node name="TestWorld" type="Node2D"]
-script = ExtResource("2_testworld")
+script = ExtResource(2)
 
-[node name="Player" parent="." unique_id=1300512529 instance=ExtResource("1_player")]
+[node name="Player" parent="." unique_id=1300512529 instance=ExtResource(1)]
 position = Vector2(500, 200)
 
-[node name="HUD" parent="." unique_id=218751332 instance=ExtResource("4_hud")]
+[node name="HUD" parent="." unique_id=218751332 instance=ExtResource(4)]
 
 [node name="FloorManager" type="Node" parent="." unique_id=1673931842]
-script = ExtResource("3_floor_mgr")
+script = ExtResource(3)
 
-[node name="ExitDoor" parent="." unique_id=30627045 instance=ExtResource("6_exit")]
+[node name="ExitDoor" parent="." unique_id=30627045 instance=ExtResource(6)]
 position = Vector2(3172, 381)
 
 [node name="DraftUI" type="CanvasLayer" parent="." unique_id=1534439096]
-script = ExtResource("7_draft")
+script = ExtResource(7)
 
-[node name="ProjectilePool" parent="." instance=ExtResource("8_pool")]
+[node name="ProjectilePool" parent="." instance=ExtResource(8)]
 
-[node name="FloorTransition" parent="." instance=ExtResource("9_transition")]
+[node name="FloorTransition" parent="." instance=ExtResource(9)]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=863036647]
 tile_set = SubResource("TileSet_industrial")

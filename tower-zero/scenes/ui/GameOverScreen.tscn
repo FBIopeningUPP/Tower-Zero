@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cwfr42bv4hjob"]
 
-[ext_resource type="Script" uid="uid://b0rd0kg3foiyf" path="res://scenes/ui/GameOverScreen.gd" id="1_0pcqs"]
+[ext_resource type="Script" path="res://scenes/ui/GameOverScreen.gd" id=1]
 
 [node name="GameOverScreen" type="CanvasLayer" unique_id=1564734586]
 process_mode = 3
-script = ExtResource("1_0pcqs")
+script = ExtResource(1)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=840980447]
 anchors_preset = 15

@@ -23,7 +23,6 @@ func transition_to(next_scene_path: String, floor_number: int, is_safe_room: boo
 
 func _play_transition() -> void:
 	var tween = create_tween()
-	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	
 	tween.tween_property(fade_rect, "color:a", 1.0, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.tween_callback(_on_fade_in_complete)

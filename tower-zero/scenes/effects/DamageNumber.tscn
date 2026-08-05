@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bk6jptdigto51"]
 
-[ext_resource type="Script" uid="uid://cmyitf3x1ulb8" path="res://scenes/effects/DamageNumber.gd" id="1_fg07k"]
+[ext_resource type="Script" path="res://scenes/effects/DamageNumber.gd" id=1]
 
 [node name="DamageNumber" type="Node2D" unique_id=1094412974]
-script = ExtResource("1_fg07k")
+script = ExtResource(1)
 
 [node name="Label" type="Label" parent="." unique_id=1976300563]
 anchors_preset = 8

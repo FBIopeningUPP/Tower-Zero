@@ -120,7 +120,7 @@ func _build_ui() -> void:
 
 func _animate_cards_in() -> void:
 	var tween = create_tween()
-	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
+    
 
 	for i in range(card_containers.size()):
 		var container = card_containers[i]
@@ -129,7 +129,7 @@ func _animate_cards_in() -> void:
 
 func _animate_title_in(title: Label) -> void:
 	var tween = create_tween()
-	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
+    
 	tween.tween_property(title, "modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_card_hover(index: int, entered: bool) -> void:
@@ -139,7 +139,7 @@ func _on_card_hover(index: int, entered: bool) -> void:
 	var container = card_containers[index]
 	var btn = card_buttons[index]
 	var tween = create_tween()
-	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
+    
 	
 	if entered:
 		tween.tween_property(container, "scale", Vector2(1.08, 1.08), 0.15).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -167,12 +167,10 @@ func _on_card_picked(index: int) -> void:
 	_animate_card_selection(index)
 	
 	var tween = create_tween()
-	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	tween.tween_callback(_finish_draft).set_delay(0.8)
 
 func _animate_card_selection(chosen_index: int) -> void:
 	var tween = create_tween()
-	tween.set_pause_mode(Node.PAUSE_MODE_PROCESS)
     
 	for i in range(card_containers.size()):
 		var container = card_containers[i]
