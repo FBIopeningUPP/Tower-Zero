@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c1t2e3r4m5i6"]
+[gd_scene format=4 uid="uid://c1t2e3r4m5i6"]
 
 [ext_resource type="Script" path="res://scenes/objects/CorporateTerminal.gd" id="1_term"]
 [ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_icon"]

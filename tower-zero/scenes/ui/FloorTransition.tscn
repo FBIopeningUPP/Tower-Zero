@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://f1l2o3o4r5t6"]
+[gd_scene format=4 uid="uid://f1l2o3o4r5t6"]
 
 [ext_resource type="Script" path="res://scenes/ui/FloorTransition.gd" id="1_trans"]
 

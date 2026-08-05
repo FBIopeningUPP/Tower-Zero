@@ -45,4 +45,4 @@ func _hold_text() -> void:
 func _on_transition_finished() -> void:
 	fade_rect.visible = false
 	transition_finished.emit(target_scene)
-	queue_free()
+	queue_free()i a
