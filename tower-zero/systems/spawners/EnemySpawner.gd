@@ -1,42 +1,42 @@
-extends Node2D
+extends Node
+class_name EnemySpawner
 
-@export var ground_enemy: PackedScene = preload("res://entities/enemies/Enemy.tscn")
-@export var drone_enemy: PackedScene = preload("res://entities/enemies/Drone.tscn")
-@export var boss_enemy: PackedScene = preload("res://entities/enemies/Boss.tscn")
+@export var spawn_interval: float = 2
+@export var max_enemies: int = 10
 
-var floor_manager: FloorManager = null
-var enemies_to_spawn: int = 0
-var spawn_timer: Timer
+var enemy_scene: PackedScene = preload("res://entities/enemies/Enemy.tscn")
+var drone_scene: PackedScene = preload("res://entities/enemies/Drone.tscn")
+
+var spawn_timer: float = 0
+var spawned_count: int = 0
+var active: bool = false
 
 func _ready() -> void:
-	spawn_timer = Timer.new()
-	spawn_timer.wait_time = 1.5
-	spawn_timer.autostart = false
-	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	add_child(spawn_timer)
-	
-func start_spawning(fm: FloorManager) -> void:
-	floor_manager = fm
-	enemies_to_spawn = fm.get_enemy_count_for_floor(fm.current_floor)
-	spawn_timer.start()
+	set_process(false)
+
+func start_spawning(target_count: int) -> void:
+	max_enemies = target_count
+	spawned_count = 0
+	active = true
+	set_process(true)
+	spawn_timer = 0
 
 func stop_spawning() -> void:
-	spawn_timer.stop()
-	enemies_to_spawn = 0
+	active = false
+	set_process(false)
 
-func _on_spawn_timer_timeout() -> void:
-	if enemies_to_spawn <= 0:
-		spawn_timer.stop()
+func _process(delta: float) -> void:
+	if not active or spawned_count >= max_enemies:
 		return
 	
-	var scene_to_spawn = ground_enemy
-	var drone_chance = min(0.1 + (floor_manager.current_floor + 0.05), 0.6)
-	if randf() < drone_chance:
-		scene_to_spawn = drone_enemy
-		
-	var enemy = scene_to_spawn.instantiate()
+	spawn_timer += delta
+	if spawn_timer >= spawn_interval:
+		spawn_timer = 0
+		_spawn_enemy()
+
+func _spawn_enemy() -> void:
+	var scene = drone_scene if randf() < 0.3 else enemy_scene
+	var enemy = scene.instantiate()
 	get_parent().add_child(enemy)
-	var random_offset = Vector2(randf_range(-200, 200), randf_range(-50, 50))
-	enemy.global_position = self.global_position + random_offset
-	
-	enemies_to_spawn -= 1
+	enemy.global_position = Vector2(randf_range(-2000, 2000), -500)
+	spawned_count += 1

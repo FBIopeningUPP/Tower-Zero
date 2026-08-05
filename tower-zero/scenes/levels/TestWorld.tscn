@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b8j082gjy82in" path="res://scenes/ui/HUD.tscn" id="3_iyqsp"]
 [ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="5_v3ud1"]
 [ext_resource type="PackedScene" path="res://scenes/objects/ExitDoor.tscn" id="6_door"]
-[ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id="7_draft"]
+[ext_resource type="Script" uid="uid://dnnqtkd3y82jw" path="res://scenes/ui/DraftUI.gd" id="7_draft"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nig7w"]
 texture = ExtResource("5_v3ud1")
@@ -33,7 +33,7 @@ script = ExtResource("1_v3ud1")
 [node name="ExitDoor" parent="." unique_id=30627045 instance=ExtResource("6_door")]
 position = Vector2(3172, 381)
 
-[node name="DraftUI" type="CanvasLayer" parent="."]
+[node name="DraftUI" type="CanvasLayer" parent="." unique_id=1534439096]
 script = ExtResource("7_draft")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=863036647]
