@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://f1l2o3o4r5t6"]
+
+[ext_resource type="Script" path="res://scenes/ui/FloorTransition.gd" id="1_trans"]
+
+[node name="FloorTransition" type="CanvasLayer" unique_id=4001]
+script = ExtResource("1_trans")
+layer = 200
+
+[node name="FadeRect" type="ColorRect" parent="." unique_id=4002]
+anchors_preset = 0
+color = Color(0, 0, 0, 0)
+size = Vector2(1920, 1080)
+
+[node name="FloorLabel" type="Label" parent="." unique_id=4003]
+anchors_preset = 5
+offset_left = -300.0
+offset_top = -80.0
+offset_right = 300.0
+offset_bottom = 80.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 72
+modulate = Color(1, 1, 1, 0)
+text = "FLOOR 1"
+
+[node name="SubLabel" type="Label" parent="." unique_id=4004]
+anchors_preset = 5
+offset_left = -250.0
+offset_top = 20.0
+offset_right = 250.0
+offset_bottom = 60.0
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 28
+modulate = Color(0.7, 0.8, 1.0, 0)
+text = "SAFE ROOM"

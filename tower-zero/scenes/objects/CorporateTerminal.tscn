@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c1t2e3r4m5i6"]
+
+[ext_resource type="Script" path="res://scenes/objects/CorporateTerminal.gd" id="1_term"]
+[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_icon"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HackingMinigame.tscn" id="3_hack"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_term_body"]
+size = Vector2(96, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_term_area"]
+size = Vector2(200, 200)
+
+[node name="CorporateTerminal" type="StaticBody2D" unique_id=2001]
+script = ExtResource("1_term")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2002]
+texture = ExtResource("2_icon")
+scale = Vector2(0.75, 1.25)
+modulate = Color(0.3, 0.4, 0.6, 1.0)
+position = Vector2(0, -80)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2003]
+shape = SubResource("RectangleShape2D_term_body")
+position = Vector2(0, -80)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=2004]
+collision_layer = 0
+collision_mask = 2
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=2005]
+shape = SubResource("RectangleShape2D_term_area")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=2006]
+text = "PRESS E TO ACCESS TERMINAL"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+position = Vector2(0, -180)
+visible = false
+modulate = Color(1, 1, 0.8, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2007]
+offset = Vector2(0, -80)
+color = Color(0.4, 0.6, 1.0, 1.0)
+height = 100.0
+texture = ExtResource("2_icon")
