@@ -27,3 +27,13 @@ offset_right = 1900.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 36
 text = "KILLS: 0"
+
+[node name="FloorLabel" type="Label" parent="."]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 250.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+text = "FLOOR 1"
+visible = false
