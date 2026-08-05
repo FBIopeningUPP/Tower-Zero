@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://s4a5f6e7d8ha"]
+
+[ext_resource type="Script" path="res://scenes/levels/SafeRoom.gd" id="1_safe"]
+[ext_resource type="PackedScene" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_icon"]
+[ext_resource type="PackedScene" uid="uid://tqkfqv1fkj1i" path="res://entities/player/Player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/objects/CorporateTerminal.tscn" id="4_terminal"]
+[ext_resource type="PackedScene" path="res://scenes/objects/ExitDoor.tscn" id="5_exit"]
+[ext_resource type="PackedScene" uid="uid://b8j082gjy82in" path="res://scenes/ui/HUD.tscn" id="6_hud"]
+[ext_resource type="Script" uid="uid://dnnqtkd3y82jw" path="res://scenes/ui/DraftUI.gd" id="7_draft"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_safe"]
+texture = ExtResource("2_icon")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_safe"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_safe")
+
+[node name="SafeRoom" type="Node2D" unique_id=1001]
+script = ExtResource("1_safe")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1002]
+position = Vector2(200, 100)
+
+[node name="TerminalPos" type="Marker2D" parent="." unique_id=1003]
+position = Vector2(800, 100)
+
+[node name="ShaftPos" type="Marker2D" parent="." unique_id=1004]
+position = Vector2(1400, 100)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1005]
+[node name="ParallaxLayer_Far" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1006]
+motion_scale = Vector2(0.1, 0.1)
+[node name="Sprite2D_Far" type="Sprite2D" parent="ParallaxLayer_Far" unique_id=1007]
+texture = ExtResource("2_icon")
+scale = Vector2(20, 10)
+modulate = Color(0.9, 0.95, 1.0, 0.3)
+
+[node name="ParallaxLayer_Mid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1008]
+motion_scale = Vector2(0.3, 0.3)
+[node name="Sprite2D_Mid" type="Sprite2D" parent="ParallaxLayer_Mid" unique_id=1009]
+texture = ExtResource("2_icon")
+scale = Vector2(15, 8)
+modulate = Color(0.8, 0.9, 1.0, 0.5)
+
+[node name="ParallaxLayer_Near" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1010]
+motion_scale = Vector2(0.6, 0.6)
+[node name="Sprite2D_Near" type="Sprite2D" parent="ParallaxLayer_Near" unique_id=1011]
+texture = ExtResource("2_icon")
+scale = Vector2(10, 5)
+modulate = Color(0.7, 0.85, 1.0, 0.7)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1012]
+tile_set = SubResource("TileSet_safe")
+
+[node name="CorporateTerminal" parent="." unique_id=1013 instance=ExtResource("4_terminal")]
+
+[node name="ExitDoor" parent="." unique_id=1014 instance=ExtResource("5_exit")]
+
+[node name="HUD" parent="." unique_id=1015 instance=ExtResource("6_hud")]
+
+[node name="DraftUI" type="CanvasLayer" parent="." unique_id=1016]
+script = ExtResource("7_draft")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1017]
+color = Color(1.0, 0.95, 0.85, 1.0)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1018]
+emitting = true
+amount = 20
+lifetime = 10.0
+speed_scale = 5.0
+gravity = Vector2(0, -10)
+spread = 3.14
+color_ramp = Gradient {
+	colors = [Color(1, 1, 1, 0), Color(1, 1, 1, 0.3), Color(1, 1, 1, 0)]
+}

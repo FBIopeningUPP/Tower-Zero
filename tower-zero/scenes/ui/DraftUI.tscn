@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d1r2a3f4t5u6"]
+
+[ext_resource type="Script" path="res://scenes/ui/DraftUI.gd" id="1_draft"]
+
+[node name="DraftUI" type="CanvasLayer" unique_id=5001]
+script = ExtResource("1_draft")
+layer = 100
+process_mode = 3
+visible = false

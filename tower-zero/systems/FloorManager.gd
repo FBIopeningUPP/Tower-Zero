@@ -3,6 +3,8 @@ class_name FloorManager
 
 signal floor_cleared(floor_number: int)
 signal floor_started(floor_number: int)
+signal transition_to_safe_room(floor_number: int)
+signal transition_to_combat(floor_number: int)
 
 @export var base_enemy_count: int = 3
 @export var enemies_per_floor: int = 2
@@ -31,7 +33,7 @@ func start_floor() -> void:
 		var enemy = scene.instantiate()
 		get_parent().add_child(enemy)
 		enemy.global_position = Vector2(randf_range(-2000, 2000), -500)
-		
+
 func _on_enemy_died(_xp: int) -> void:
 	if not floor_active:
 		return
@@ -40,9 +42,12 @@ func _on_enemy_died(_xp: int) -> void:
 		enemies_alive = 0
 		floor_active = false
 		floor_cleared.emit(current_floor)
+		transition_to_safe_room.emit(current_floor)
 
 func advance_floor() -> void:
 	current_floor += 1
+	RunState.advance_floor()
+	transition_to_combat.emit(current_floor)
 
 func get_current_floor() -> int:
 	return current_floor
