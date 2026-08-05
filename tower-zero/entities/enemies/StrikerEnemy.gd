@@ -1,8 +1,12 @@
-extends Node2D
+extends Enemy
+class_name StrikerEnemy
 
-
-@export var health: int = 20
-@export var speed: float = 150.0
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health: HealthComponent = $HealthComponent
+@onready var hitbox: HitboxComponent = $AttackHitbox
+@onready var hurtbox: HurtboxComponent = $HurtboxComponent
+@onready var patrol_path: Path2D = $PatrolPath
+@onready var death_effect: CPUParticles2D = $DeathEffect
 
 func _ready() -> void:
 	pass
