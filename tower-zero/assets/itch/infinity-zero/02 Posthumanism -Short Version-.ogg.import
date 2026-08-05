@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnjwn31kxk3us"
+path="res://.godot/imported/02 Posthumanism -Short Version-.ogg-b68e525abc1d255ee893bda884cdc002.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/itch/infinity-zero/02 Posthumanism -Short Version-.ogg"
+dest_files=["res://.godot/imported/02 Posthumanism -Short Version-.ogg-b68e525abc1d255ee893bda884cdc002.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

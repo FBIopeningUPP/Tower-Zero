@@ -1,32 +1,43 @@
-[gd_scene format=3 uid="uid://cxiwun7t8qs7q"]
+[gd_scene format=4 uid="uid://projectile_base_001"]
 
-[ext_resource type="Script" uid="uid://cgic0tgvqvu1k" path="res://entities/projectiles/Projectile.gd" id="1_avawr"]
-[ext_resource type="Script" uid="uid://bws6rd0o0y2qj" path="res://components/HitboxComponent.gd" id="2_rscxe"]
-[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="3_o8llt"]
+[ext_resource type="Script" path="res://entities/projectiles/Projectile.gd" id="1_proj_gd"]
+[ext_resource type="Texture2D" path="res://assets/itch/eradication-wars-weapons/Tiny Bonus/tiny projectiles/micro projectile (1).png" id="2_proj_tex"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/MuzzleFlash.tscn" id="3_muzzle"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_proj"]
-radius = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_proj"]
+size = Vector2(24, 12)
 
-[node name="Projectile" type="Area2D" unique_id=1221281169]
-script = ExtResource("1_avawr")
+[node name="Projectile" type="RigidBody2D"]
+script = ExtResource("1_proj_gd")
+collision_layer = 3
+collision_mask = 2
+mass = 0.1
+gravity_scale = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
+mode = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560665578]
-modulate = Color(1, 1, 0, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_o8llt")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_proj_tex")
+scale = Vector2(4, 4)
+centered = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=71230471]
-shape = SubResource("CircleShape2D_proj")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_proj")
 
-[node name="HitboxComponent" type="Area2D" parent="." unique_id=345592731]
-script = ExtResource("2_rscxe")
-damage = 20
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=875160890]
-shape = SubResource("CircleShape2D_proj")
-
-[node name="Timer" type="Timer" parent="." unique_id=1688467538]
-wait_time = 2.0
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="TrailParticles" type="CPUParticles2D" parent="."]
+emitting = true
+amount = 10
+lifetime = 0.3
+speed_scale = 0.5
+gravity = Vector2(0, 0)
+spread = 0.5
+scale = Vector2(0.2, 0.2)
+color_ramp = Gradient {
+	colors = [Color(1, 1, 1, 0.8), Color(1, 0.8, 0.2, 0.4), Color(1, 0.5, 0, 0)]
+}

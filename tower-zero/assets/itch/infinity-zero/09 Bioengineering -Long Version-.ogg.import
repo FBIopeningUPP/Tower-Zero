@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://m74c1cgnnqcu"
+path="res://.godot/imported/09 Bioengineering -Long Version-.ogg-b203ea70166f9439344e02eba97a7aeb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/itch/infinity-zero/09 Bioengineering -Long Version-.ogg"
+dest_files=["res://.godot/imported/09 Bioengineering -Long Version-.ogg-b203ea70166f9439344e02eba97a7aeb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://s4a5f6e7d8ha"]
+[gd_scene format=4 uid="uid://saferoom_001"]
 
 [ext_resource type="Script" path="res://scenes/levels/SafeRoom.gd" id="1_safe"]
 [ext_resource type="PackedScene" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_icon"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/ExitDoor.tscn" id="5_exit"]
 [ext_resource type="PackedScene" uid="uid://b8j082gjy82in" path="res://scenes/ui/HUD.tscn" id="6_hud"]
 [ext_resource type="Script" uid="uid://dnnqtkd3y82jw" path="res://scenes/ui/DraftUI.gd" id="7_draft"]
+[ext_resource type="PackedScene" path="res://scenes/ui/FloorTransition.tscn" id="8_transition"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_safe"]
 texture = ExtResource("2_icon")
@@ -18,7 +19,7 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_safe")
 
-[node name="SafeRoom" type="Node2D" unique_id=1001]
+[node name="SafeRoom" type="Node2D"]
 script = ExtResource("1_safe")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1002]
@@ -77,3 +78,5 @@ spread = 3.14
 color_ramp = Gradient {
 	colors = [Color(1, 1, 1, 0), Color(1, 1, 1, 0.3), Color(1, 1, 1, 0)]
 }
+
+[node name="FloorTransition" parent="." instance=ExtResource("8_transition")]
