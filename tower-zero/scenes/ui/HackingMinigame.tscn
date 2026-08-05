@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large.png" id=2]
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large_l.png" id=3]
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large_r.png" id=4]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Green/Default/bar_round_gloss_large.png" id="5_bar_green"]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Red/Default/bar_round_gloss_large.png" id="6_bar_red"]
-[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Yellow/Default/bar_round_gloss_large.png" id="7_bar_yellow"]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Green/Default/bar_round_gloss_large.png" id=5]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Red/Default/bar_round_gloss_large.png" id=6]
+[ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Yellow/Default/bar_round_gloss_large.png" id=7]
 
 [node name="HackingMinigame" type="CanvasLayer" unique_id=3001]
 script = ExtResource(1)
