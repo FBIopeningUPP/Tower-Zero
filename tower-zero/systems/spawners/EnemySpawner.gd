@@ -3,46 +3,40 @@ extends Node2D
 @export var ground_enemy: PackedScene = preload("res://entities/enemies/Enemy.tscn")
 @export var drone_enemy: PackedScene = preload("res://entities/enemies/Drone.tscn")
 @export var boss_enemy: PackedScene = preload("res://entities/enemies/Boss.tscn")
-@export var starting_spawn_interval: float = 3.0
-@export var minimum_spawn_interval: float = 0.5 
 
-var current_interval: float
-var timer: Timer
-var kill_count: int = 0
-var boss_spawned: bool = false
+var floor_manager: FloorManager = null
+var enemies_to_spawn: int = 0
+var spawn_timer: Timer
 
 func _ready() -> void:
-	current_interval = starting_spawn_interval
+	spawn_timer = Timer.new()
+	spawn_timer.wait_time = 1.5
+	spawn_timer.autostart = false
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	add_child(spawn_timer)
 	
-	timer = Timer.new()
-	timer.wait_time = current_interval
-	timer.autostart = true
-	timer.timeout.connect(_on_spawn_timer_timeout)
-	add_child(timer)
-	
-	EventBus.enemy_died.connect(_on_enemy_died)
-	
-func _on_enemy_died(xp: int) -> void:
-	current_interval = max(current_interval * 0.98, minimum_spawn_interval)
-	timer.wait_time = current_interval
-	
-	kill_count += 1
-	if kill_count == 50 and not boss_spawned:
-		boss_spawned = true
-		var boss = boss_enemy.instantiate()
-		get_parent().add_child(boss)
-		boss.global_position = self.global_position
+func start_spawning(fm: FloorManager) -> void:
+	floor_manager = fm
+	enemies_to_spawn = fm.get_enemy_count_for_floor(fm.current_floor)
+	spawn_timer.start()
+
+func stop_spawning() -> void:
+	spawn_timer.stop()
+	enemies_to_spawn = 0
 
 func _on_spawn_timer_timeout() -> void:
-	var scene_to_spawn = ground_enemy
+	if enemies_to_spawn <= 0:
+		spawn_timer.stop()
+		return
 	
-	if randf() > 0.5:
+	var scene_to_spawn = ground_enemy
+	var drone_chance = min(0.1 + (floor_manager.current_floor + 0.05), 0.6)
+	if randf() < drone_chance:
 		scene_to_spawn = drone_enemy
 		
-	if scene_to_spawn:
-		var enemy = scene_to_spawn.instantiate()
-		get_parent().add_child(enemy)
-		
-		# Add a random offset so they don't spawn perfectly inside each other!
-		var random_offset = Vector2(randf_range(-100, 100), randf_range(-50, 50))
-		enemy.global_position = self.global_position + random_offset
+	var enemy = scene_to_spawn.instantiate()
+	get_parent().add_child(enemy)
+	var random_offset = Vector2(randf_range(-200, 200), randf_range(-50, 50))
+	enemy.global_position = self.global_position + random_offset
+	
+	enemies_to_spawn -= 1

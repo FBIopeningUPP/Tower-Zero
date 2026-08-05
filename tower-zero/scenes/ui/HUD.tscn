@@ -19,3 +19,11 @@ offset_top = 60.0
 offset_right = 220.0
 offset_bottom = 80.0
 show_percentage = false
+
+[node name="KillCounter" type="Label" parent="."]
+offset_left = 1700.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 36
+text = "KILLS: 0"

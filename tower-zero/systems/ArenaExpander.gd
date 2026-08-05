@@ -13,12 +13,10 @@ func _expand_arena():
 		print("Auto-expanding Arena TileMapLayer...")
 		tml.clear()
 		
-		# Paint massive floor (3x wider)
 		for x in range(-30, 30):
 			tml.set_cell(Vector2i(x, 4), 0, Vector2i(0,0))
 			tml.set_cell(Vector2i(x, 5), 0, Vector2i(0,0)) # Thicker floor
 			
-		# Paint massive walls (way taller)
 		for y in range(-25, 5):
 			tml.set_cell(Vector2i(-30, y), 0, Vector2i(0,0))
 			tml.set_cell(Vector2i(30, y), 0, Vector2i(0,0))
@@ -31,12 +29,10 @@ func _expand_arena():
 		for x in range(-5, 5):
 			tml.set_cell(Vector2i(x, -12), 0, Vector2i(0,0))
 			
-	# Move the spawner way up into the sky so they drop onto the platforms
 	var spawner = root.get_node_or_null("EnemySpawner")
 	if spawner:
 		spawner.global_position = Vector2(0, -2500)
 		
-	# Duplicate the spawner so it drops from the left and right sides of the massive room too!
 	if not root.has_node("EnemySpawnerLeft"):
 		var spawner_left = spawner.duplicate()
 		spawner_left.name = "EnemySpawnerLeft"

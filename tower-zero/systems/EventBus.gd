@@ -4,8 +4,9 @@ extends Node
 signal player_health_changed(current, max_hp)
 signal player_died
 signal enemy_died(xp)
-signal floor_cleared
+signal floor_cleared(floor_number: int)
 signal hit_landed 
+signal next_floor_requested
 
 func _ready() -> void:
 	hit_landed.connect(_on_hit_landed)

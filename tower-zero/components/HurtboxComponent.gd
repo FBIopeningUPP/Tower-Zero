@@ -14,15 +14,13 @@ func _on_area_entered(area: Area2D) -> void:
 		var victim = self.get_parent()
 		
 		if attacker == victim:
-			return # Don't hit yourself!
+			return 
 			
-		# The player's blaster projectiles shouldn't hurt the player!
 		if attacker is projectile and victim is Player:
 			return
 			
-		# Enemies and Drones shouldn't hurt each other
-		var attacker_is_enemy = (attacker is Enemy) or (attacker is Drone)
-		var victim_is_enemy = (victim is Enemy) or (victim is Drone)
+		var attacker_is_enemy = (attacker is Enemy) or (attacker is Drone) or (attacker is Boss)
+		var victim_is_enemy = (victim is Enemy) or (victim is Drone) or (victim is Boss)
 		if attacker_is_enemy and victim_is_enemy:
 			return
 			
