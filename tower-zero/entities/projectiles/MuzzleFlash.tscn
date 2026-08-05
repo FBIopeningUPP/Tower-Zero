@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://muzzle_flash_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://entities/projectiles/MuzzleFlash.gd" id=1]
 [ext_resource type="Texture2D" path="res://assets/itch/eradication-wars-weapons/Tiny Bonus/tiny muzzles/micro muzzle (1).png" id=2]

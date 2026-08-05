@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://enemy_ninja_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://entities/enemies/NinjaEnemy.gd" id=1]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
@@ -17,6 +17,9 @@ size = Vector2(40, 90)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(72, 48)
+
+[sub_resource type="Gradient" id="Gradient_ninja_death"]
+colors = [Color(1, 0.8, 0.2, 1), Color(1, 0.4, 0, 0.5), Color(1, 0.8, 0.2, 0)]
 
 [node name="NinjaEnemy" type="CharacterBody2D"]
 script = ExtResource(1)
@@ -45,8 +48,7 @@ monitorable = true
 shape = SubResource("RectangleShape2D_hurtbox")
 position = Vector2(0, -48)
 
-[node name="HitboxComponent" type="Area2D" parent="."]
-name = "SwordHitbox"
+[node name="SwordHitbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 1
 monitoring = false
@@ -66,6 +68,4 @@ speed_scale = 1.5
 gravity = Vector2(0, 0)
 spread = 3.14
 scale = Vector2(0.4, 0.4)
-color_ramp = Gradient {
-	colors = [Color(1, 0.8, 0.2, 1), Color(1, 0.4, 0, 0.5), Color(1, 0.8, 0.2, 0)]
-}
+color_ramp = SubResource("Gradient_ninja_death")

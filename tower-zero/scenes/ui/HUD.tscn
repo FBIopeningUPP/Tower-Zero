@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://hud_001"]
+[gd_scene format=4]
 
 [ext_resource type="Script" path="res://scenes/ui/HUD.gd" id=1]
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large.png" id=2]
