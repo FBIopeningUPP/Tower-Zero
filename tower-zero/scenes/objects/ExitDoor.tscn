@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/objects/ExitDoor.gd" id="1_door"]
+[ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="2_icon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(128, 256)
+
+[node name="ExitDoor" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_door")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(1, 2)
+texture = ExtResource("2_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_door")
