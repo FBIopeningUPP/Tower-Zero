@@ -9,6 +9,11 @@ var projectile_pool: Array[Node] = []
 var muzzle_pool: Array[Node] = []
 
 func _ready() -> void:
+	# Fallback preloads if not assigned in editor
+	if not projectile_scene:
+		projectile_scene = preload("res://entities/projectiles/Projectile.tscn")
+	if not muzzle_flash_scene:
+		muzzle_flash_scene = preload("res://entities/projectiles/MuzzleFlash.tscn")
 	_prefill_pool()
 
 func _prefill_pool() -> void:
