@@ -10,6 +10,8 @@ var burn_damage: int = 0
 var poison_timer: float = 0
 var original_speed: float = 0
 
+var burn_tick_timer: float = 0.0
+
 func _ready() -> void:
 	if parent_body and "speed" in parent_body:
 		original_speed = parent_body.speed
@@ -17,7 +19,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if burn_timer > 0:
 		burn_timer -= delta
-		if int(burn_timer * 10) % 5 == 0:
+		burn_tick_timer -= delta
+		if burn_tick_timer <= 0:
+			burn_tick_timer = 0.5
 			if health_component:
 				health_component.take_damage(burn_damage)
 	

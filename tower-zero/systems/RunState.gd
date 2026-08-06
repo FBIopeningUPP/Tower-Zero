@@ -31,6 +31,10 @@ var biome_colors: Dictionary = {
 
 func _ready() -> void:
 	_load_save()
+	if player_stats.is_empty():
+		_reset_player_stats_to_base()
+		_apply_permanent_upgrades()
+		_apply_character_passive()
 
 func start_new_run() -> void:
 	current_floor = 1
