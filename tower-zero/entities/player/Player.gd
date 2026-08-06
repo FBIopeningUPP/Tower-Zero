@@ -9,7 +9,7 @@ class_name Player
 
 @onready var hurtbox_collision: CollisionShape2D = $HurtboxComponent/CollisionShape2D
 @onready var camera: Camera2D = $Camera2D
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var sword_hitbox: Area2D = $SwordHitbox
 

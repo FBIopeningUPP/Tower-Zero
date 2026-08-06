@@ -1,8 +1,6 @@
-[gd_scene format=4]
+[gd_scene format=3 uid="uid://dwgmv000u6345"]
 
-[ext_resource type="Script" path="res://systems/ProjectilePool.gd" id=1]
-[ext_resource type="PackedScene" path="res://entities/projectiles/Projectile.tscn" id=2]
-[ext_resource type="PackedScene" path="res://entities/projectiles/MuzzleFlash.tscn" id=3]
+[ext_resource type="Script" uid="uid://s8cuflwher0o" path="res://systems/ProjectilePool.gd" id="1"]
 
-[node name="ProjectilePool" type="Node"]
-script = ExtResource(1)
+[node name="ProjectilePool" type="Node" unique_id=194016603]
+script = ExtResource("1")
