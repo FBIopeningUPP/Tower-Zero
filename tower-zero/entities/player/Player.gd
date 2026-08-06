@@ -148,7 +148,7 @@ func _on_death() -> void:
 		ui.show_death_screen()
 
 func _on_enemy_killed(gained_xp: int) -> void:
-	xp += gained_xp
+	xp += int(gained_xp * RunState.modifier_multiplier * RunState.combo_multiplier)
 	if xp >= xp_to_next_level:
 		xp -= xp_to_next_level
 		level += 1
