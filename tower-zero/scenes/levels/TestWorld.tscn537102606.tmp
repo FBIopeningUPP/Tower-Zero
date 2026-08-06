@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://csemwmcy0g8mf" path="res://icon.svg" id="5"]
 [ext_resource type="PackedScene" uid="uid://d7h8j2lal3m4" path="res://scenes/objects/ExitDoor.tscn" id="6"]
 [ext_resource type="Script" uid="uid://dnnqtkd3y82jw" path="res://scenes/ui/DraftUI.gd" id="7"]
-[ext_resource type="PackedScene" uid="uid://dwgmv000u6345" path="res://systems/ProjectilePool.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://systems/ProjectilePool.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://scenes/ui/FloorTransition.tscn" id="9"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_industrial"]

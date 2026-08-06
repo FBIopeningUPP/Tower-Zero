@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var energy_bar: ProgressBar = $EnergyBar
+@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var energy_bar: TextureProgressBar = $EnergyBar
 @onready var kill_counter: Label = $KillCounter
 @onready var floor_label: Label = $FloorLabel 
 
