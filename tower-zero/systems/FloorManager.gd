@@ -13,8 +13,24 @@ var current_floor: int = 1
 var enemies_alive: int = 0
 var floor_active: bool = false
 
-var ground_enemy: PackedScene = preload("res://entities/enemies/Enemy.tscn")
-var drone_enemy: PackedScene = preload("res://entities/enemies/Drone.tscn")
+var enemy_pool: Array[PackedScene] = [
+	preload("res://entities/enemies/Enemy.tscn"),
+	preload("res://entities/enemies/Drone.tscn"),
+	preload("res://entities/enemies/NinjaEnemy.tscn"),
+	preload("res://entities/enemies/StrikerEnemy.tscn"),
+	preload("res://entities/enemies/Galore/Bat.tscn"),
+	preload("res://entities/enemies/Galore/Crab.tscn"),
+	preload("res://entities/enemies/Galore/Golem.tscn"),
+	preload("res://entities/enemies/Galore/Pebble.tscn"),
+	preload("res://entities/enemies/Galore/Rat.tscn"),
+	preload("res://entities/enemies/Galore/Skull.tscn"),
+	preload("res://entities/enemies/Galore/Slime.tscn")
+]
+
+var room_pool: Array[PackedScene] = [
+	preload("res://scenes/levels/rooms/Room1.tscn")
+]
+var current_room: Node2D = null
 
 func _ready() -> void:
 	EventBus.enemy_died.connect(_on_enemy_died)
@@ -22,17 +38,35 @@ func _ready() -> void:
 func start_floor() -> void:
 	if floor_active:
 		return
+		
+	if current_room:
+		current_room.queue_free()
+		
+	var room_scene = room_pool.pick_random()
+	current_room = room_scene.instantiate()
+	get_parent().add_child(current_room)
+	get_parent().move_child(current_room, 1) # Put it behind the player but in front of background
 	
 	var count = base_enemy_count + (current_floor - 1) * enemies_per_floor
 	enemies_alive = count
 	floor_active = true
 	floor_started.emit(current_floor)
 	
+	var spawn_points = current_room.get_node_or_null("SpawnPoints")
+	var spawners = []
+	if spawn_points:
+		spawners = spawn_points.get_children()
+	
 	for i in range(count):
-		var scene = drone_enemy if randf() < 0.3 else ground_enemy
+		var scene = enemy_pool.pick_random()
 		var enemy = scene.instantiate()
 		get_parent().add_child(enemy)
-		enemy.global_position = Vector2(randf_range(-2000, 2000), -500)
+		
+		if spawners.size() > 0:
+			var spawner = spawners[randi() % spawners.size()]
+			enemy.global_position = spawner.global_position + Vector2(randf_range(-50, 50), -50)
+		else:
+			enemy.global_position = Vector2(randf_range(0, 1000), -500)
 
 func _on_enemy_died(_xp: int) -> void:
 	if not floor_active:

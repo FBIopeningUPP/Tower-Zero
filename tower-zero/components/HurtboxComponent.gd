@@ -6,7 +6,17 @@ var damage_number_scene = preload("res://scenes/effects/DamageNumber.tscn")
 @export var health_component: HealthComponent
 
 func _ready() -> void:
+	add_to_group("hurtbox")
 	area_entered.connect(_on_area_entered)
+
+func take_damage(amount: int) -> void:
+	if health_component:
+		health_component.take_damage(amount)
+		
+		var num = damage_number_scene.instantiate()
+		get_tree().current_scene.add_child(num)
+		num.global_position = self.global_position
+		num.setup(amount)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent and health_component != null:

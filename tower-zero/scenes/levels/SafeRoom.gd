@@ -26,25 +26,25 @@ func _setup_biome() -> void:
 func _adjust_parallax_for_biome(biome: String) -> void:
 	match biome:
 		"Office":
-			$ParallaxBackground/ParallaxLayer_Far/Sprite2D_Far.modulate = Color(0.9, 0.95, 1.0, 0.3)
-			$ParallaxBackground/ParallaxLayer_Mid/Sprite2D_Mid.modulate = Color(0.8, 0.9, 1.0, 0.5)
-			$ParallaxBackground/ParallaxLayer_Near/Sprite2D_Near.modulate = Color(0.7, 0.85, 1.0, 0.7)
+			$ParallaxBackground/ParallaxLayer_Far/ColorRect_Far.modulate = Color(0.9, 0.95, 1.0, 0.3)
+			$ParallaxBackground/ParallaxLayer_Mid/ColorRect_Mid.modulate = Color(0.8, 0.9, 1.0, 0.5)
+			$ParallaxBackground/ParallaxLayer_Near/ColorRect_Near.modulate = Color(0.7, 0.85, 1.0, 0.7)
 		"Server":
-			$ParallaxBackground/ParallaxLayer_Far/Sprite2D_Far.modulate = Color(0.4, 0.5, 0.8, 0.3)
-			$ParallaxBackground/ParallaxLayer_Mid/Sprite2D_Mid.modulate = Color(0.3, 0.4, 0.7, 0.5)
-			$ParallaxBackground/ParallaxLayer_Near/Sprite2D_Near.modulate = Color(0.2, 0.3, 0.6, 0.7)
+			$ParallaxBackground/ParallaxLayer_Far/ColorRect_Far.modulate = Color(0.4, 0.5, 0.8, 0.3)
+			$ParallaxBackground/ParallaxLayer_Mid/ColorRect_Mid.modulate = Color(0.3, 0.4, 0.7, 0.5)
+			$ParallaxBackground/ParallaxLayer_Near/ColorRect_Near.modulate = Color(0.2, 0.3, 0.6, 0.7)
 		"Lab":
-			$ParallaxBackground/ParallaxLayer_Far/Sprite2D_Far.modulate = Color(0.5, 0.8, 0.5, 0.3)
-			$ParallaxBackground/ParallaxLayer_Mid/Sprite2D_Mid.modulate = Color(0.4, 0.7, 0.4, 0.5)
-			$ParallaxBackground/ParallaxLayer_Near/Sprite2D_Near.modulate = Color(0.3, 0.6, 0.3, 0.7)
+			$ParallaxBackground/ParallaxLayer_Far/ColorRect_Far.modulate = Color(0.5, 0.8, 0.5, 0.3)
+			$ParallaxBackground/ParallaxLayer_Mid/ColorRect_Mid.modulate = Color(0.4, 0.7, 0.4, 0.5)
+			$ParallaxBackground/ParallaxLayer_Near/ColorRect_Near.modulate = Color(0.3, 0.6, 0.3, 0.7)
 		"Foundry":
-			$ParallaxBackground/ParallaxLayer_Far/Sprite2D_Far.modulate = Color(0.9, 0.4, 0.2, 0.3)
-			$ParallaxBackground/ParallaxLayer_Mid/Sprite2D_Mid.modulate = Color(0.8, 0.3, 0.1, 0.5)
-			$ParallaxBackground/ParallaxLayer_Near/Sprite2D_Near.modulate = Color(0.7, 0.2, 0.1, 0.7)
+			$ParallaxBackground/ParallaxLayer_Far/ColorRect_Far.modulate = Color(0.9, 0.4, 0.2, 0.3)
+			$ParallaxBackground/ParallaxLayer_Mid/ColorRect_Mid.modulate = Color(0.8, 0.3, 0.1, 0.5)
+			$ParallaxBackground/ParallaxLayer_Near/ColorRect_Near.modulate = Color(0.7, 0.2, 0.1, 0.7)
 		"Core":
-			$ParallaxBackground/ParallaxLayer_Far/Sprite2D_Far.modulate = Color(0.4, 0.2, 0.5, 0.3)
-			$ParallaxBackground/ParallaxLayer_Mid/Sprite2D_Mid.modulate = Color(0.3, 0.1, 0.4, 0.5)
-			$ParallaxBackground/ParallaxLayer_Near/Sprite2D_Near.modulate = Color(0.2, 0.1, 0.3, 0.7)
+			$ParallaxBackground/ParallaxLayer_Far/ColorRect_Far.modulate = Color(0.4, 0.2, 0.5, 0.3)
+			$ParallaxBackground/ParallaxLayer_Mid/ColorRect_Mid.modulate = Color(0.3, 0.1, 0.4, 0.5)
+			$ParallaxBackground/ParallaxLayer_Near/ColorRect_Near.modulate = Color(0.2, 0.1, 0.3, 0.7)
 
 func _adjust_particles_for_biome(biome: String) -> void:
 	match biome:

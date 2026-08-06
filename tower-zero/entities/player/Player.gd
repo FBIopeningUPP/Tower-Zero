@@ -7,11 +7,15 @@ class_name Player
 @export var dash_speed: float = 800.0
 @export var dash_duration: float = 0.2
 
+@onready var weapon_manager: WeaponManager = $WeaponManager
 @onready var hurtbox_collision: CollisionShape2D = $HurtboxComponent/CollisionShape2D
 @onready var camera: Camera2D = $Camera2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var sword_hitbox: Area2D = $SwordHitbox
+@onready var katana_hitbox: Area2D = $KatanaHitbox
+@onready var hammer_hitbox: Area2D = $HammerHitbox
+@onready var daggers_hitbox: Area2D = $DaggersHitbox
 
 var game_over_scene = preload("res://scenes/ui/GameOverScreen.tscn")
 var projectile_scene = preload("res://entities/projectiles/Projectile.tscn")
@@ -32,6 +36,7 @@ enum State { NORMAL, DASHING }
 var current_state: State = State.NORMAL
 
 func _ready() -> void:
+	add_to_group("player")
 	if health_component:
 		health_component.health_changed.connect(_on_health_changed)
 		EventBus.player_energy_changed.emit(energy, max_energy)
@@ -65,19 +70,7 @@ func _physics_process(delta: float) -> void:
 	update_animations()
 
 func handle_normal_state(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	else:
-		can_double_jump = true
-
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
-			velocity.y = jump_velocity
-		elif can_double_jump:
-			velocity.y = jump_velocity
-			can_double_jump = false
-
-	if Input.is_action_pressed("crouch") and is_on_floor():
+	if Input.is_action_pressed("crouch"):
 		is_crouching = true
 		scale.y = 0.5
 	else:
@@ -89,29 +82,21 @@ func handle_normal_state(delta: float) -> void:
 		return
 
 	if Input.is_action_just_pressed("attack"):
-		sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
-		get_tree().create_timer(0.1).timeout.connect(func(): sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
-
+		weapon_manager.attack_melee()
+	
 	if Input.is_action_just_pressed("shoot"):
-		if energy >= 25:
-			energy -= 25
-			EventBus.player_energy_changed.emit(energy, max_energy)
-			var proj = projectile_scene.instantiate()
-			get_parent().add_child(proj)
-			proj.global_position = global_position
-			proj.direction = sign(velocity.x) if velocity.x != 0 else 1
-
-	var direction := Input.get_axis("move_left", "move_right")
+		weapon_manager.attack_ranged()
+	
+	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var current_speed = walk_speed if Input.is_action_pressed("walk") else run_speed
 
 	if is_crouching:
 		current_speed = 0.0
 
-	if direction:
-		velocity.x = direction * current_speed
-		sword_hitbox.position.x = abs(sword_hitbox.position.x) * direction
+	if input_dir != Vector2.ZERO:
+		velocity = input_dir * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity = velocity.move_toward(Vector2.ZERO, current_speed)
 
 func start_dash() -> void:
 	var input_vec := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -127,8 +112,7 @@ func start_dash() -> void:
 func handle_dash_state(delta: float) -> void:
 	dash_timer -= delta
 	if dash_timer <= 0:
-		velocity.x = move_toward(velocity.x, 0, run_speed)
-		velocity.y = 0
+		velocity = velocity.move_toward(Vector2.ZERO, run_speed)
 		current_state = State.NORMAL
 		hurtbox_collision.set_deferred("disabled", false)
 		sprite.modulate = Color.WHITE
@@ -141,6 +125,23 @@ func _process(delta: float) -> void:
 		camera.offset = Vector2(offset_x, offset_y)
 	else:
 		camera.offset = Vector2.ZERO
+		
+	# Top-down aiming: rotate hitboxes to face mouse
+	var mouse_dir = global_position.direction_to(get_global_mouse_position())
+	var angle = mouse_dir.angle()
+	var dist = 70.0 # Distance from center
+	
+	sword_hitbox.position = mouse_dir * dist
+	sword_hitbox.rotation = angle
+	
+	katana_hitbox.position = mouse_dir * dist
+	katana_hitbox.rotation = angle
+	
+	hammer_hitbox.position = mouse_dir * dist
+	hammer_hitbox.rotation = angle
+	
+	daggers_hitbox.position = mouse_dir * (dist * 0.7) # daggers are closer
+	daggers_hitbox.rotation = angle
 
 func _on_death() -> void:
 	var ui = get_node("GameOverScreen")

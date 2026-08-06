@@ -1,24 +1,20 @@
-extends Enemy
-class_name Bat
+import os
+import glob
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var health: HealthComponent = $HealthComponent
-@onready var hitbox: HitboxComponent = $AttackHitbox
-@onready var hurtbox: HurtboxComponent = $HurtboxComponent
-@onready var partrol_path: Path2D = $PatrolPath
-@onready var death_effect: CPUParticles2D = $DeathEffect
+def fix_gd(file_path, enemy_name):
+    with open(file_path, 'r') as f:
+        content = f.read()
 
-func _ready() -> void:
-	super()
+    injection = f"""
 	if animated_sprite and animated_sprite.sprite_frames == null or animated_sprite.sprite_frames.get_animation_names().is_empty() or not animated_sprite.sprite_frames.has_animation("idle"):
 		var frames = SpriteFrames.new()
 		frames.remove_animation("default")
-		var tex_dir = DirAccess.open("res://assets/itch/enemy-galore-1/Bat/")
+		var tex_dir = DirAccess.open("res://assets/itch/enemy-galore-1/{enemy_name}/")
 		if tex_dir:
 			for tex_file in tex_dir.get_files():
 				if tex_file.ends_with(".png"):
-					var tex = load("res://assets/itch/enemy-galore-1/Bat/" + tex_file)
-					var anim_name = tex_file.replace("Bat_", "").replace(".png", "").to_lower()
+					var tex = load("res://assets/itch/enemy-galore-1/{enemy_name}/" + tex_file)
+					var anim_name = tex_file.replace("{enemy_name}_", "").replace(".png", "").to_lower()
 					if not frames.has_animation(anim_name):
 						frames.add_animation(anim_name)
 					
@@ -37,5 +33,13 @@ func _ready() -> void:
 			animated_sprite.play("idle")
 		elif frames.has_animation("fly"):
 			animated_sprite.play("fly")
+"""
 
-	pass
+    if "func _ready()" in content and "frames.remove_animation" not in content:
+        content = content.replace("func _ready() -> void:", "func _ready() -> void:\n\tsuper()" + injection)
+        with open(file_path, 'w') as f:
+            f.write(content)
+
+for gd_file in glob.glob("entities/enemies/Galore/*.gd"):
+    enemy = os.path.basename(gd_file).replace(".gd", "")
+    fix_gd(gd_file, enemy)
