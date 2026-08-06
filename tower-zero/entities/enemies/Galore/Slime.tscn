@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Ability_FX.png" id=9]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Hit.png" id=10]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Slime/Slime_Spiked_Death.png" id=11]
+[ext_resource type="Script" path="res://components/StatusEffectComponent.gd" id="99_status"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(56, 40)
@@ -75,3 +76,7 @@ gravity = Vector2(0, -15)
 spread = 2.5
 scale = Vector2(0.5, 0.5)
 color_ramp = SubResource("Gradient_slime_ability")
+[node name="StatusEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "parent_body")]
+script = ExtResource("99_status")
+health_component = NodePath("../HealthComponent")
+parent_body = NodePath("..")

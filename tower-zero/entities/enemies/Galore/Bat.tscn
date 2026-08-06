@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Death.png" id=7]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Death_FX.png" id=8]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Bat/Bat_Hit.png" id=9]
+[ext_resource type="Script" path="res://components/StatusEffectComponent.gd" id="99_status"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(48, 32)
@@ -73,3 +74,7 @@ gravity = Vector2(0, 0)
 spread = 3.14
 scale = Vector2(0.4, 0.4)
 color_ramp = SubResource("Gradient_bat_death")
+[node name="StatusEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "parent_body")]
+script = ExtResource("99_status")
+health_component = NodePath("../HealthComponent")
+parent_body = NodePath("..")

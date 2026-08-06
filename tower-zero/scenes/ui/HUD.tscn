@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Red/Default/bar_round_gloss_large_r.png" id=5]
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Blue/Default/bar_round_gloss_large_l.png" id=6]
 [ext_resource type="Texture2D" path="res://assets/kenney/ui-pack-sci-fi/PNG/Red/Default/bar_round_gloss_large_l.png" id=7]
+[ext_resource type="PackedScene" path="res://scenes/ui/ComboUI.tscn" id="8_combo"]
 
 [node name="HUD" type="CanvasLayer" unique_id=218751332]
 script = ExtResource(1)
@@ -57,3 +58,5 @@ horizontal_alignment = 1
 text = "FLOOR 1"
 visible = false
 modulate = Color(0.2, 1.0, 0.8, 1.0)
+
+[node name="ComboUI" parent="." instance=ExtResource("8_combo")]

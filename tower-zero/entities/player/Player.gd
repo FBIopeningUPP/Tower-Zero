@@ -126,10 +126,9 @@ func _process(delta: float) -> void:
 	else:
 		camera.offset = Vector2.ZERO
 		
-	# Top-down aiming: rotate hitboxes to face mouse
 	var mouse_dir = global_position.direction_to(get_global_mouse_position())
 	var angle = mouse_dir.angle()
-	var dist = 70.0 # Distance from center
+	var dist = 70.0 
 	
 	sword_hitbox.position = mouse_dir * dist
 	sword_hitbox.rotation = angle
@@ -140,7 +139,7 @@ func _process(delta: float) -> void:
 	hammer_hitbox.position = mouse_dir * dist
 	hammer_hitbox.rotation = angle
 	
-	daggers_hitbox.position = mouse_dir * (dist * 0.7) # daggers are closer
+	daggers_hitbox.position = mouse_dir * (dist * 0.7) 
 	daggers_hitbox.rotation = angle
 
 func _on_death() -> void:
