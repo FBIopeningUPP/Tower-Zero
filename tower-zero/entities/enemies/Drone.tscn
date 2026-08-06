@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://components/HitboxComponent.gd" id=3]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=4]
 [ext_resource type="Script" path="res://components/HurtboxComponent.gd" id=5]
+[ext_resource type="Script" path="res://components/StatusEffectComponent.gd" id="99_status"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a6jk"]
 radius = 64.0
@@ -46,3 +47,8 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1684625803]
 shape = SubResource("CapsuleShape2D_oh04j")
+
+[node name="StatusEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "parent_body")]
+script = ExtResource("99_status")
+health_component = NodePath("../HealthComponent")
+parent_body = NodePath("..")

@@ -41,3 +41,11 @@ func _on_area_entered(area: Area2D) -> void:
 		get_tree().current_scene.add_child(num)
 		num.global_position = self.global_position
 		num.setup(area.damage)
+		
+		var status_comp = victim.get_node_or_null("StatusEffectComponent")
+		if status_comp:
+			match area.element_type:
+				HitboxComponent.Element.FIRE:
+					status_comp.apply_fire(5, 4)
+				HitboxComponent.Element.POISON:
+					status_comp.apply_poison(5)
