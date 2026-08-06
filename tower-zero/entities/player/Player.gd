@@ -12,10 +12,10 @@ class_name Player
 @onready var camera: Camera2D = $Camera2D
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var sword_hitbox: Area2D = $SwordHitbox
-@onready var katana_hitbox: Area2D = $KatanaHitbox
-@onready var hammer_hitbox: Area2D = $HammerHitbox
-@onready var daggers_hitbox: Area2D = $DaggersHitbox
+@onready var sword_hitbox: HitboxComponent = $SwordHitbox
+@onready var katana_hitbox: HitboxComponent = $KatanaHitbox
+@onready var hammer_hitbox: HitboxComponent = $HammerHitbox
+@onready var daggers_hitbox: HitboxComponent = $DaggersHitbox
 
 var game_over_scene = preload("res://scenes/ui/GameOverScreen.tscn")
 var projectile_scene = preload("res://entities/projectiles/Projectile.tscn")

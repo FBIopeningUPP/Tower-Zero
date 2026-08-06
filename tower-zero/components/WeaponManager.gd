@@ -1,71 +1,87 @@
 extends Node
 class_name WeaponManager
 
-@onready var player: Player = get_parent()
+@onready var parent: Player = get_parent()
 
 var current_melee: String = "katana"
 var current_ranged: String = "blaster"
 
+var can_attack: bool = true
+var attack_cooldown: float = 0.4
+var attack_timer: float = 0.0
+
+var can_shoot: bool = true
+var shoot_cooldown: float = 0.2
+var shoot_timer: float = 0.0
+
+var projectile_scene = preload("res://entities/projectiles/Projectile.tscn")
+var muzzle_flash_scene = preload("res://entities/projectiles/MuzzleFlash.tscn")
+
+func _process(delta: float) -> void:
+	if not can_attack:
+		attack_timer -= delta
+		if attack_timer <= 0:
+			can_attack = true
+			
+	if not can_shoot:
+		shoot_timer -= delta
+		if shoot_timer <= 0:
+			can_shoot = true
+
 func attack_melee() -> void:
-	match current_melee:
-		"sword":
-			player.sword_hitbox.damage = RunState.player_stats.get("sword_damage", 40)
-			player.sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
-			get_tree().create_timer(0.1).timeout.connect(func(): player.sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
-		"katana":
-			player.katana_hitbox.damage = int(RunState.player_stats.get("sword_damage", 40) * 0.75)
-			player.katana_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
-			get_tree().create_timer(0.05).timeout.connect(func(): player.katana_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
-		"hammer":
-			player.hammer_hitbox.damage = int(RunState.player_stats.get("sword_damage", 40) * 2.0)
-			player.hammer_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
-			player.shake_strength = 20.0
-			get_tree().create_timer(0.2).timeout.connect(func(): player.hammer_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
-		"daggers":
-			player.daggers_hitbox.damage = int(RunState.player_stats.get("sword_damage", 40) * 0.5)
-			player.daggers_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
-			player.velocity.x += sign(player.velocity.x if player.velocity.x != 0 else 1) * 300 # thrust forward
-			get_tree().create_timer(0.05).timeout.connect(func(): player.daggers_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true))
+	if not can_attack:
+		return
 	
+	var target_pos = parent.get_global_mouse_position()
+	var dir = parent.global_position.direction_to(target_pos)
+	var angle = dir.angle()
+	
+	var active_hitbox: HitboxComponent = null
+	
+	match RunState.active_weapon_primary:
+		"Sword":
+			active_hitbox = parent.sword_hitbox
+			parent.sprite.play("slash")
+		"Katana":
+			active_hitbox = parent.katana_hitbox
+		"Hammer":
+			active_hitbox = parent.hammer_hitbox
+		"Daggers":
+			active_hitbox = parent.daggers_hitbox
+	
+	if active_hitbox:
+		active_hitbox.damage = RunState.player_stats["sword_damage"]
+		active_hitbox.element_type = HitboxComponent.Element.POISON
+		
+		# Show the hitbox briefly (assuming you handle disabling it in AnimationPlayer)
+		active_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
+		
+	can_attack = false
+	attack_timer = attack_cooldown
+
 func attack_ranged() -> void:
-	var cost = 25
-	var base_dmg = RunState.player_stats.get("blaster_damage", 20)
-	match current_ranged:
-		"blaster":
-			cost = 25
-			if player.energy >= cost:
-				player.energy -= cost
-				EventBus.player_energy_changed.emit(player.energy, player.max_energy)
-				var proj = player.projectile_scene.instantiate()
-				proj.damage = base_dmg
-				get_tree().current_scene.add_child(proj)
-				proj.global_position = player.global_position
-				proj.direction = player.global_position.direction_to(player.get_global_mouse_position())
-		"shotgun":
-			cost = 40
-			if player.energy >= cost:
-				player.energy -= cost
-				EventBus.player_energy_changed.emit(player.energy, player.max_energy)
-				var base_dir = player.global_position.direction_to(player.get_global_mouse_position())
-				for i in range(3):
-					var proj = player.projectile_scene.instantiate()
-					proj.damage = int(base_dmg * 0.7)
-					get_tree().current_scene.add_child(proj)
-					proj.global_position = player.global_position
-					# Add slight random spread to the angle
-					var spread_angle = randf_range(-0.3, 0.3)
-					proj.direction = base_dir.rotated(spread_angle)
-		"sniper":
-			cost = 50
-			if player.energy >= cost:
-				player.energy -= cost
-				EventBus.player_energy_changed.emit(player.energy, player.max_energy)
-				var proj = player.projectile_scene.instantiate()
-				proj.damage = int(base_dmg * 2.5)
-				get_tree().current_scene.add_child(proj)
-				proj.global_position = player.global_position
-				var dir = player.global_position.direction_to(player.get_global_mouse_position())
-				proj.direction = dir
-				proj.rotation = dir.angle()
-				proj.speed = 2000 # Super fast
-				proj.scale = Vector2(2, 0.5)
+	if not can_shoot:
+		return
+	
+	var proj = projectile_scene.instantiate()
+	get_tree().current_scene.add_child(proj)
+	proj.global_position = parent.global_position
+	
+	var target_pos = parent.get_global_mouse_position()
+	proj.direction = parent.global_position.direction_to(target_pos)
+	
+	proj.damage = RunState.player_stats["blaster_damage"]
+	
+	proj.element_type = HitboxComponent.Element.FIRE
+	var proj_sprite = proj.get_node_or_null("Sprite2D")
+	if proj_sprite:
+		proj_sprite.modulate = Color.ORANGE
+	
+	if muzzle_flash_scene:
+		var flash = muzzle_flash_scene.instantiate()
+		get_tree().current_scene.add_child(flash)
+		flash.global_position = parent.global_position
+		flash.rotation = proj.direction.angle()
+	
+	can_shoot = false
+	shoot_timer = shoot_cooldown

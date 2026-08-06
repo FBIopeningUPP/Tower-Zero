@@ -887,6 +887,7 @@ shape = SubResource("RectangleShape2D_hurtbox")
 position = Vector2(0, -48)
 
 [node name="SwordHitbox" type="Area2D" parent="."]
+script = ExtResource(3)
 collision_layer = 3
 collision_mask = 2
 monitoring = false
@@ -897,6 +898,7 @@ shape = SubResource("RectangleShape2D_hitbox")
 position = Vector2(60, -48)
 
 [node name="KatanaHitbox" type="Area2D" parent="."]
+script = ExtResource(3)
 collision_layer = 3
 collision_mask = 2
 monitoring = false
@@ -908,6 +910,7 @@ shape = SubResource("RectangleShape2D_katana_hitbox")
 position = Vector2(70, -48)
 
 [node name="HammerHitbox" type="Area2D" parent="."]
+script = ExtResource(3)
 collision_layer = 3
 collision_mask = 2
 monitoring = false
@@ -919,6 +922,7 @@ shape = SubResource("RectangleShape2D_hammer_hitbox")
 position = Vector2(80, -50)
 
 [node name="DaggersHitbox" type="Area2D" parent="."]
+script = ExtResource(3)
 collision_layer = 3
 collision_mask = 2
 monitoring = false
