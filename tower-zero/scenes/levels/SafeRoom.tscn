@@ -37,23 +37,29 @@ position = Vector2(1400, 100)
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1005]
 [node name="ParallaxLayer_Far" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1006]
 motion_scale = Vector2(0.1, 0.1)
-[node name="Sprite2D_Far" type="Sprite2D" parent="ParallaxLayer_Far" unique_id=1007]
-texture = ExtResource(2)
-scale = Vector2(20, 10)
+[node name="ColorRect_Far" type="ColorRect" parent="ParallaxLayer_Far" unique_id=1007]
+offset_left = -2000.0
+offset_top = -1000.0
+offset_right = 2000.0
+offset_bottom = 1000.0
 modulate = Color(0.9, 0.95, 1.0, 0.3)
 
 [node name="ParallaxLayer_Mid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1008]
 motion_scale = Vector2(0.3, 0.3)
-[node name="Sprite2D_Mid" type="Sprite2D" parent="ParallaxLayer_Mid" unique_id=1009]
-texture = ExtResource(2)
-scale = Vector2(15, 8)
+[node name="ColorRect_Mid" type="ColorRect" parent="ParallaxLayer_Mid" unique_id=1009]
+offset_left = -2000.0
+offset_top = -1000.0
+offset_right = 2000.0
+offset_bottom = 1000.0
 modulate = Color(0.8, 0.9, 1.0, 0.5)
 
 [node name="ParallaxLayer_Near" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1010]
 motion_scale = Vector2(0.6, 0.6)
-[node name="Sprite2D_Near" type="Sprite2D" parent="ParallaxLayer_Near" unique_id=1011]
-texture = ExtResource(2)
-scale = Vector2(10, 5)
+[node name="ColorRect_Near" type="ColorRect" parent="ParallaxLayer_Near" unique_id=1011]
+offset_left = -2000.0
+offset_top = -1000.0
+offset_right = 2000.0
+offset_bottom = 1000.0
 modulate = Color(0.7, 0.85, 1.0, 0.7)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1012]

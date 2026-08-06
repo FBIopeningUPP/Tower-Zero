@@ -24,11 +24,12 @@ func _on_death() -> void:
 	queue_free()
 	
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	velocity.x = direction * speed
-	
-	if is_on_wall():
-		direction *= -1
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		var player = players[0]
+		var dir = global_position.direction_to(player.global_position)
+		velocity = dir * speed
+	else:
+		velocity = Vector2.ZERO
 	
 	move_and_slide()

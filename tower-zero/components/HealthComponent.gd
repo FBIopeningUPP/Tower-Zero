@@ -11,6 +11,9 @@ func _ready() -> void:
 	current_health = max_health
 
 func take_damage(amount: int) -> void:
+	if current_health <= 0:
+		return
+		
 	current_health -= amount
 	current_health = clampi(current_health, 0, max_health)
 	

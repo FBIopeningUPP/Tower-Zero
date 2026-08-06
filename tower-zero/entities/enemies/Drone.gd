@@ -14,7 +14,7 @@ func _ready() -> void:
 		health_component.health_changed.connect(func(c, m): EventBus.enemy_damaged.emit())
 		
 	# Find the player!
-	var players = get_tree().get_nodes_in_group("Player")
+	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		target = players[0]
 		

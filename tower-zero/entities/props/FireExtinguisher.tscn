@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://fire_extinguisher_prop"]
+
+[ext_resource type="Script" path="res://entities/props/ExplosiveExtinguisher.gd" id="1_script"]
+[ext_resource type="Script" path="res://entities/props/OfficeProp.gd" id="2_script"]
+[ext_resource type="Script" path="res://components/HealthComponent.gd" id="3_health"]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="4_hurtbox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_solid"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(26, 26)
+
+[node name="FireExtinguisher" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_script")
+explosion_damage = 50
+explosion_radius = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+script = ExtResource("2_script")
+prop_type = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_solid")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_health")
+max_health = 10
+
+[node name="HurtboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_hurtbox")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_hurt")

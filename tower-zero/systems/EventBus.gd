@@ -7,6 +7,7 @@ signal floor_cleared(floor_number: int)
 signal floor_started(floor_number: int)
 signal hit_landed
 signal next_floor_requested
+signal door_entered
 signal enemy_damaged
 signal player_energy_changed(current, max_energy)
 

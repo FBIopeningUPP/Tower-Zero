@@ -22,7 +22,7 @@ func _on_floor_cleared(_floor: int) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if door_open and body.is_in_group("Player"):
-		EventBus.next_floor_requested.emit()
+		EventBus.door_entered.emit()
 		door_open = false
 		set_process(false)
 		collision.disabled = true
