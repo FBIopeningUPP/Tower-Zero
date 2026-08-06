@@ -24,7 +24,7 @@ func _on_enemy_died(base_xp: int) -> void:
 	var rank = get_rank()
 	var mult = get_multiplier()
 
-	RunState.modifier_multiplier = mult
+	RunState.combo_multiplier = mult
 
 	combo_updated.emit(combo_count, rank, mult)
 

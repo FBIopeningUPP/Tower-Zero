@@ -17,6 +17,7 @@ var selected_character: String = "Default"
 var permanent_upgrades: Dictionary = {}
 var modifiers: Array = []
 var modifier_multiplier: float = 1.0
+var combo_multiplier: float = 1.0
 var best_floor: int = 1
 var total_runs: int = 0
 var tutorial_completed: bool = false

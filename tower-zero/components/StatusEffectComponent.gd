@@ -24,11 +24,15 @@ func _process(delta: float) -> void:
 			burn_tick_timer = 0.5
 			if health_component:
 				health_component.take_damage(burn_damage)
+		if burn_timer <= 0 and poison_timer <= 0 and parent_body and parent_body.has_node("Sprite2D"):
+			parent_body.get_node("Sprite2D").modulate = Color.WHITE
 	
 	if poison_timer > 0:
 		poison_timer -= delta
 		if poison_timer <= 0 and parent_body and "speed" in parent_body:
 			parent_body.speed = original_speed
+			if burn_timer <= 0 and parent_body.has_node("Sprite2D"):
+				parent_body.get_node("Sprite2D").modulate = Color.WHITE
 
 func apply_fire(damage: int, duration: float) -> void:
 	burn_damage = damage
