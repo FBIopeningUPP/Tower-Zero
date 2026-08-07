@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cm6hc83ma7c2r"]
+
+[ext_resource type="PackedScene" path="res://entities/player/Player.tscn" id="1"]
+[ext_resource type="Script" uid="uid://bfwbawjw56vmh" path="res://scenes/levels/TestWorld.gd" id="2"]
+[ext_resource type="Script" uid="uid://26n0jtlbq54m" path="res://systems/FloorManager.gd" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://d7h8j2lal3m4" path="res://scenes/objects/ExitDoor.tscn" id="6"]
+[ext_resource type="Script" uid="uid://dnnqtkd3y82jw" path="res://scenes/ui/DraftUI.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://dwgmv000u6345" path="res://systems/ProjectilePool.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/ui/FloorTransition.tscn" id="9"]
+
+[node name="TestWorld" type="Node2D" unique_id=249356315]
+script = ExtResource("2")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=9001]
+color = Color(1, 0.95, 0.85, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=9002]
+
+[node name="ParallaxLayer_Far" type="ParallaxLayer" parent="ParallaxBackground" unique_id=9003]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="ColorRect_Far" type="ColorRect" parent="ParallaxBackground/ParallaxLayer_Far" unique_id=9004]
+modulate = Color(0.9, 0.95, 1, 0.3)
+offset_left = -2000.0
+offset_top = -1000.0
+offset_right = 2000.0
+offset_bottom = 1000.0
+
+[node name="ParallaxLayer_Mid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=9005]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="ColorRect_Mid" type="ColorRect" parent="ParallaxBackground/ParallaxLayer_Mid" unique_id=9006]
+modulate = Color(0.8, 0.9, 1, 0.5)
+offset_left = -2000.0
+offset_top = -1000.0
+offset_right = 2000.0
+offset_bottom = 1000.0
+
+[node name="ParallaxLayer_Near" type="ParallaxLayer" parent="ParallaxBackground" unique_id=9007]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="ColorRect_Near" type="ColorRect" parent="ParallaxBackground/ParallaxLayer_Near" unique_id=9008]
+modulate = Color(0.7, 0.85, 1, 0.7)
+offset_left = -2000.0
+offset_top = -1000.0
+offset_right = 2000.0
+offset_bottom = 1000.0
+
+[node name="EnvironmentParticles" type="CPUParticles2D" parent="." unique_id=9009]
+amount = 20
+lifetime = 10.0
+speed_scale = 5.0
+spread = 3.14
+gravity = Vector2(0, -10)
+
+[node name="Player" parent="." unique_id=1300512529 instance=ExtResource("1")]
+position = Vector2(500, 200)
+
+[node name="HUD" parent="." unique_id=218751332 instance=ExtResource("4")]
+
+[node name="FloorManager" type="Node" parent="." unique_id=1673931842]
+script = ExtResource("3")
+
+[node name="ExitDoor" parent="." unique_id=30627045 instance=ExtResource("6")]
+position = Vector2(3172, 381)
+
+[node name="ProjectilePool" parent="." unique_id=794283092 instance=ExtResource("8")]
+
+[node name="FloorTransition" parent="." unique_id=763660275 instance=ExtResource("9")]
+
+[node name="DraftUI" type="CanvasLayer" parent="." unique_id=1534439096]
+script = ExtResource("7")

@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func attack_melee() -> void:
 	if not can_attack:
 		return
-	
+		
 	var target_pos = parent.get_global_mouse_position()
 	var dir = parent.global_position.direction_to(target_pos)
 	var angle = dir.angle()
@@ -47,15 +47,32 @@ func attack_melee() -> void:
 		"Hammer":
 			active_hitbox = parent.hammer_hitbox
 		"Daggers":
-			active_hitbox = parent.daggers_hitbox
+			active_hitbox = parent.sowrd_hitbox
 	
 	if active_hitbox:
 		active_hitbox.damage = RunState.player_stats["sword_damage"]
-		active_hitbox.element_type = HitboxComponent.Element.POISON
 		
-		# Show the hitbox briefly (assuming you handle disabling it in AnimationPlayer)
-		active_hitbox.get_node("CollisionShape2D").set_deferred("disabled", false)
+		# Assign elements based on weapon
+		match RunState.active_weapon_primary:
+			"Sword":
+				active_hitbox.element_type = HitboxComponent.Element.ELECTRIC
+			"Katana":
+				active_hitbox.element_type = HitboxComponent.Element.FIRE
+			"Hammer":
+				active_hitbox.element_type = HitboxComponent.Element.POISON
+			_:
+				active_hitbox.element_type = HitboxComponent.Element.NONE
 		
+		# Enable hitbox, then disable it after a short delay so it can hit again!
+		var shape = active_hitbox.get_node("CollisionShape2D")
+		shape.set_deferred("disabled", false)
+		
+		var timer = get_tree().create_timer(0.2)
+		timer.timeout.connect(func():
+			if is_instance_valid(shape):
+				shape.set_deferred("disabled", true)
+		)
+	
 	can_attack = false
 	attack_timer = attack_cooldown
 
