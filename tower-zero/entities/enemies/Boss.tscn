@@ -21,7 +21,7 @@ height = 140.0
 
 [node name="Boss" type="CharacterBody2D" unique_id=1482676010]
 scale = Vector2(2.5, 2.5)
-collision_layer = 4
+collision_layer = 8
 script = ExtResource(1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=475400918]

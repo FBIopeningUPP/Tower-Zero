@@ -21,7 +21,7 @@ height = 140.0
 
 [node name="Drone" type="CharacterBody2D" unique_id=1764206993]
 scale = Vector2(0.7, 0.7)
-collision_layer = 4
+collision_layer = 8
 script = ExtResource(1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1293403859]

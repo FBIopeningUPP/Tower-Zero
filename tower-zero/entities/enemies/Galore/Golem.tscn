@@ -1,9 +1,9 @@
 [gd_scene format=4]
 
 [ext_resource type="Script" path="res://entities/enemies/Galore/Golem.gd" id=1]
-[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id=999]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="999_hurtbox"]
 [ext_resource type="Script" path="res://components/HealthComponent.gd" id=2]
-[ext_resource type="Script" path="res://components/HitboxComponent.gd" id=3]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="3_hitbox"]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_IdleA.png" id=4]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_IdleB.png" id=5]
 [ext_resource type="Texture2D" path="res://assets/itch/enemy-galore-1/Golem/No Armor/Golem_Run.png" id=6]
@@ -48,8 +48,8 @@ colors = [Color(0.8, 0.7, 0.5, 1), Color(0.6, 0.5, 0.3, 0.5), Color(0.8, 0.7, 0.
 
 [node name="Golem" type="CharacterBody2D"]
 script = ExtResource(1)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 8
+collision_mask = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -56)
@@ -64,7 +64,7 @@ position = Vector2(0, -56)
 script = ExtResource(2)
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
-script = ExtResource(999)
+script = ExtResource("999_hurtbox")
 collision_layer = 2
 collision_mask = 1
 monitoring = true
@@ -75,7 +75,7 @@ shape = SubResource("RectangleShape2D_hurtbox")
 position = Vector2(0, -56)
 
 [node name="AttackHitbox" type="Area2D" parent="."]
-script = ExtResource(3)
+script = ExtResource("3_hitbox")
 collision_layer = 3
 collision_mask = 1
 monitoring = false
