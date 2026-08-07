@@ -64,6 +64,9 @@ func attack_melee() -> void:
 				active_hitbox.element_type = HitboxComponent.Element.NONE
 		
 		# Enable hitbox, then disable it after a short delay so it can hit again!
+		# CRITICAL: We must rotate the hitbox so it actually swings where we aim!
+		active_hitbox.rotation = angle
+		
 		var shape = active_hitbox.get_node("CollisionShape2D")
 		shape.set_deferred("disabled", false)
 		

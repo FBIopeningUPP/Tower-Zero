@@ -27,9 +27,7 @@ var enemy_pool: Array[PackedScene] = [
 	preload("res://entities/enemies/Galore/Slime.tscn")
 ]
 
-var room_pool: Array[PackedScene] = [
-	preload("res://scenes/levels/rooms/Room1.tscn")
-]
+# We will load specific floors dynamically based on the current_floor number!
 var current_room: Node2D = null
 
 func _ready() -> void:
@@ -69,6 +67,14 @@ func start_floor() -> void:
 		rect.size = w["size"]
 		shape.shape = rect
 		wall.add_child(shape)
+		
+		# Give the wall a visual so we can actually see it!
+		var vis = ColorRect.new()
+		vis.size = w["size"]
+		vis.position = -vis.size / 2
+		vis.color = RunState.get_biome_color().darkened(0.8)
+		wall.add_child(vis)
+		
 		current_room.add_child(wall)
 		
 	# Generate random internal obstacles (pillars, crates, servers)
