@@ -21,4 +21,4 @@ had a project deadline coming up super fast and wanted to make a vampire survivo
 ![alt text](image-1.png)
 
 # AI usage
-ai aws used marjorly to fix the scenes of the godot engine and help with clleaning up of files and debugging the files
+ai aws used marjorly to fix the scenes of the godot engine and help with clleaning up of files and debugging the files, and exporting the prject for executables
