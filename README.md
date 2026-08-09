@@ -1,13 +1,22 @@
-# Tower Zero 🗡️
+# tower zero 🗡️
 
-**Tower Zero** is a top-down roguelite survival game where u fight endless waves of enemies, pick up drafts to upgrade ur weapons, and try to survive until wave 5 to beat the boss and all that stuff.
+a top down survival arena game where u fight hordes of stuff until u reach the boss. there's weapon drafts and different enemy types.
 
-## Why I Made This
-made this for a project deadline and needed to finish it quick
-wanted to make a fun vampire survivors style arena game
+## why i made this
+had a project deadline coming up super fast and wanted to make a vampire survivors clone.
 
-## How to Play It
-1. Run the game executable.
-2. Use WASD to move around.
-3. Aim with the mouse and left-click to attack.
-4. Survive waves, pick upgrades, and beat the golem.
+## how to play it
+- use wasd to run around
+- point mouse and left click to swing sword
+- survive the waves and pick up drafts to get stronger
+- beat the giant golem at wave 5 and u win
+
+## how to use the code
+1. clone the repo
+2. open godot 4
+3. import project.godot from the tower-zero folder
+4. press play
+
+## images
+![alt text](image.png)
+![alt text](image-1.png)
