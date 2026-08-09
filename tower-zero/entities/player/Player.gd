@@ -35,6 +35,10 @@ func _ready() -> void:
 	katana_hitbox.get_node("CollisionShape2D").disabled = true
 	hammer_hitbox.get_node("CollisionShape2D").disabled = true
 	daggers_hitbox.get_node("CollisionShape2D").disabled = true
+	sword_hitbox.get_node("CollisionShape2D").position = Vector2.ZERO
+	katana_hitbox.get_node("CollisionShape2D").position = Vector2.ZERO
+	hammer_hitbox.get_node("CollisionShape2D").position = Vector2.ZERO
+	daggers_hitbox.get_node("CollisionShape2D").position = Vector2.ZERO
 	if health_component:
 		health_component.health_changed.connect(_on_health_changed)
 		EventBus.player_energy_changed.emit(energy, max_energy)
@@ -113,13 +117,14 @@ func _process(delta: float) -> void:
 	var mouse_dir = global_position.direction_to(get_global_mouse_position())
 	var angle = mouse_dir.angle()
 	var dist = 70.0
-	sword_hitbox.position = mouse_dir * dist
+	var chest_offset = Vector2(0, -48)
+	sword_hitbox.position = chest_offset + mouse_dir * dist
 	sword_hitbox.rotation = angle
-	katana_hitbox.position = mouse_dir * dist
+	katana_hitbox.position = chest_offset + mouse_dir * dist
 	katana_hitbox.rotation = angle
-	hammer_hitbox.position = mouse_dir * dist
+	hammer_hitbox.position = chest_offset + mouse_dir * dist
 	hammer_hitbox.rotation = angle
-	daggers_hitbox.position = mouse_dir * (dist * 0.7)
+	daggers_hitbox.position = chest_offset + mouse_dir * (dist * 0.7)
 	daggers_hitbox.rotation = angle
 func _on_death() -> void:
 	var ui = get_node("GameOverScreen")
