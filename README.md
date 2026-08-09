@@ -18,5 +18,4 @@ had a project deadline coming up super fast and wanted to make a vampire survivo
 4. press play
 
 ## images
-![alt text](image.png)
 ![alt text](image-1.png)
