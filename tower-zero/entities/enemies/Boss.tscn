@@ -46,6 +46,7 @@ max_health = 1000
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=301152541 node_paths=PackedStringArray("health_component")]
 script = ExtResource(5)
 health_component = NodePath("../HealthComponent")
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=845915747]
 shape = SubResource("CapsuleShape2D_oh04j")

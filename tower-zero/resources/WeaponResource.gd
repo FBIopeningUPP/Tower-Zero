@@ -1,9 +1,7 @@
 extends Resource
 class_name WeaponResource
-
 enum WeaponType { MELEE, RANGED }
 enum Element { NONE, FIRE, POISON, ELECTRIC }
-
 @export var damage: int = 0
 @export var attack_speed: float = 1.0
 @export var range: float = 100.0

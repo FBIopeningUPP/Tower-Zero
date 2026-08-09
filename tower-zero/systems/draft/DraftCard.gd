@@ -1,12 +1,10 @@
 extends Resource
 class_name DraftCard
-
 @export var card_name: String = ""
 @export var description: String = ""
 @export var icon_color: Color = Color.WHITE
 @export var effect_type: String = ""
 @export var effect_value: float = 0
-
 func apply_to(player: Player) -> void:
 	match effect_type:
 		"max_hp":
