@@ -12,13 +12,23 @@ had a project deadline coming up super fast and wanted to make a vampire survivo
 - beat the giant golem at wave 5 and u win
 
 ## how to use the code
-1. clone the repo
-2. open godot 4
-3. import project.godot from the tower-zero folder
-4. press play
+1. Clone the repository:
+```bash
+git clone https://github.com/FBIopeningUPP/Tower-Zero.git
+```
+2. Navigate into the project folder:
+```bash
+cd Tower-Zero/tower-zero
+```
+3. Open Godot Engine 4.
+4. Click "Import" and select the `project.godot` file inside the `tower-zero` folder.
+5. Press the "Play" button in the top right to run the game!
 
 ## images
-![alt text](image-1.png)
+![Gameplay Screenshot](2.png)
 
-# AI usage
-ai aws used marjorly to fix the scenes of the godot engine and help with clleaning up of files and debugging the files, and exporting the prject for executables
+## AI Usage Declaration
+I used AI to help me with:
+- fixing bugs and broken Godot scenes
+- cleaning up unused files to reduce the game size
+- fixing git errors and exporting the windows .exe
