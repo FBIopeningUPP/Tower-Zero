@@ -5,6 +5,6 @@ class_name StrikerEnemy
 @onready var hitbox: HitboxComponent = $AttackHitbox
 @onready var hurtbox: HurtboxComponent = $HurtboxComponent
 @onready var patrol_path: Path2D = $PatrolPath
-@onready var death_effect: CPUParticles2D = $DeathEffect
+
 func _ready() -> void:
 	pass

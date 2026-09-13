@@ -123,7 +123,7 @@ func _on_card_picked(index: int) -> void:
 	if selecting:
 		return
 	selecting = true
-	var player = get_tree().get_first_node_in_group("Player") as Player
+	var player = get_tree().get_first_node_in_group("player") as Player
 	if player:
 		cards[index].apply_to(player)
 		RunState.add_drafted_card({

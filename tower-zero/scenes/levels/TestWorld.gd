@@ -7,11 +7,17 @@ extends Node2D
 func _ready() -> void:
 	EventBus.next_floor_requested.connect(_on_next_floor)
 	EventBus.floor_started.connect(_on_floor_started)
+	EventBus.floor_cleared.connect(_on_floor_cleared)
 	EventBus.door_entered.connect(_on_door_entered)
 	floor_manager.start_floor()
 func _on_floor_started(_floor: int) -> void:
 	exit_door.reset_door()
 	_setup_biome()
+
+func _on_floor_cleared(_floor: int) -> void:
+	# Place the door at the top of the current arena
+	var arena_top = -floor_manager.arena_height / 2.0 + 100.0
+	exit_door.global_position = Vector2(0, arena_top)
 func _setup_biome() -> void:
 	var biome = RunState.get_current_biome()
 	var color = RunState.get_biome_color()

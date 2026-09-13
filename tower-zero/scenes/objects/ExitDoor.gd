@@ -16,7 +16,7 @@ func _on_floor_cleared(_floor: int) -> void:
 	door_open = true
 	anim_player.play("idle")
 func _on_body_entered(body: Node2D) -> void:
-	if door_open and body.is_in_group("Player"):
+	if door_open and body.is_in_group("player"):
 		EventBus.door_entered.emit()
 		door_open = false
 		set_process(false)

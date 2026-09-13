@@ -10,8 +10,8 @@ signal door_entered
 signal enemy_damaged
 signal player_energy_changed(current, max_energy)
 func _ready() -> void:
-	pass
+	hit_landed.connect(_on_hit_landed)
 func _on_hit_landed() -> void:
 	Engine.time_scale = 0.0
-	await get_tree().create_timer(0.05).timeout
+	await get_tree().create_timer(0.05, true, false, true).timeout
 	Engine.time_scale = 1.0

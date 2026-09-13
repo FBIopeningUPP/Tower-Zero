@@ -5,4 +5,4 @@ class_name Bat
 @onready var hitbox: HitboxComponent = $AttackHitbox
 @onready var hurtbox: HurtboxComponent = $HurtboxComponent
 @onready var partrol_path: Path2D = $PatrolPath
-@onready var death_effect: CPUParticles2D = $DeathEffect
+

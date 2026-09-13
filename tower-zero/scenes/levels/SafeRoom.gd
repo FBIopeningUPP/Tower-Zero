@@ -68,7 +68,7 @@ func _spawn_player() -> void:
 	var player = player_scene.instantiate()
 	add_child(player)
 	player.global_position = player_spawn.global_position
-	player.add_to_group("Player")
+	player.add_to_group("player")
 func _setup_terminal() -> void:
 	terminal.global_position = terminal_pos.global_position
 	terminal.draft_requested.connect(_on_draft_requested)
@@ -79,5 +79,5 @@ func _on_draft_requested() -> void:
 	var card_count = RunState.get_draft_card_count(0)
 	$DraftUI.show_draft(card_count)
 func _on_shaft_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player"):
 		EventBus.next_floor_requested.emit()

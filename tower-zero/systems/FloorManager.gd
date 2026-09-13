@@ -157,12 +157,12 @@ func start_floor() -> void:
 		boss.global_position = pos
 		enemies_alive = 1
 		floor_active = true
-		floor_started.emit(current_floor)
+		EventBus.floor_started.emit(current_floor)
 	else:
 		var count = base_enemy_count + (current_floor * enemies_per_floor)
 		enemies_alive = count
 		floor_active = true
-		floor_started.emit(current_floor)
+		EventBus.floor_started.emit(current_floor)
 		for i in range(count):
 			var scene = enemy_pool.pick_random()
 			var enemy = scene.instantiate()
@@ -180,7 +180,7 @@ func _on_enemy_died(_xp: int) -> void:
 	if enemies_alive <= 0:
 		enemies_alive = 0
 		floor_active = false
-		floor_cleared.emit(current_floor)
+		EventBus.floor_cleared.emit(current_floor)
 		if current_floor >= 5:
 			var victory_scene = preload("res://scenes/ui/VictoryScreen.tscn")
 			var vic = victory_scene.instantiate()
@@ -188,16 +188,7 @@ func _on_enemy_died(_xp: int) -> void:
 			canvas.add_child(vic)
 			get_tree().current_scene.add_child(canvas)
 			return
-		var draft_scene = preload("res://scenes/ui/UpgradeDraft.tscn")
-		var draft = draft_scene.instantiate()
-		var canvas = CanvasLayer.new()
-		canvas.add_child(draft)
-		get_tree().current_scene.add_child(canvas)
-		draft.upgrade_selected.connect(func():
-			canvas.queue_free()
-			advance_floor()
-			start_floor()
-		)
+		# The ExitDoor handles the draft and advancement now.
 func advance_floor() -> void:
 	current_floor += 1
 	RunState.advance_floor()

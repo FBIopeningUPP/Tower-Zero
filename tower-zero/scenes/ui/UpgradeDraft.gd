@@ -9,6 +9,7 @@ var possible_upgrades = [
 	{"name": "Heal 50 HP", "effect_type": "heal", "effect_value": 50}
 ]
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	var choices = possible_upgrades.duplicate()
 	choices.shuffle()
 	for i in range(3):
